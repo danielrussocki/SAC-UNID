@@ -29,7 +29,7 @@
       <div class="contenedor-principal">
         <div class="header">
           <h3>Cañones</h3>
-          <div class="boton-nuevo" onClick="newAlert()">
+          <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
             <a href="#"><i class="fas fa-eye fa-lg" title="Añadir nuevo cañon"></i></a>
           </div>
           <div class="boton-cancelar" onClick="cancelAlert()">
@@ -43,23 +43,29 @@
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Status</th>
+                <th scope="col">Entrada</th>
+                <th scope="col">Control</th>
+                <th scope="col">Num. Serie</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
               <?php
-                        $canones = $db->select("canones","*"); 
+                        $canones = $db->select("canones","*");
                         if($canones)
-                        { 
-                            foreach ($canones as $canon) 
-                            { 
+                        {
+                            foreach ($canones as $canon)
+                            {
               ?>
               <tr>
                 <th scope="row"><?php echo $canon['id_can']; ?></th>
                 <td><?php echo utf8_encode($canon['nombre_can']); ?></td>
                 <td><?php echo $canon['status_can']; ?></td>
+                <td><?php echo $canon['entrada_can']; ?></td>
+                <td><?php echo $canon['control_can']; ?></td>
+                <td><?php echo $canon['serie_can']; ?></td>
                 <td>
-                  <a href="#" data="<?php echo $canon['id_can']; ?>" class="btn-edit"><i class="fas fa-edit" title="Editar"></i></a> 
+                  <a href="#" data="<?php echo $canon['id_can']; ?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
                   <a href="#" data="<?php echo $canon['id_can']; ?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
                 </td>
                 <?php
@@ -73,10 +79,13 @@
           </table>
           <!-- FORMULARIO -->
           <div class="form">
-            <form action="" class="form-register">
-              <input type="text" placeholder="Nombre" />
-              <input type="text" placeholder="Status" />
-              <button>Registrar cañon <i class="fas fa-eye fa-sm"></i></button>
+            <form class="form-register" id="canon-form">
+              <input type="text" name="nombre" id="nombre" placeholder="Nombre" />
+              <input type="text" name="status" id="status" placeholder="Status" />
+              <input type="text" name="entrada" id="entrada" placeholder="Entrada" />
+              <input type="text" name="control" id="control" placeholder="Control" />
+              <input type="text" name="serie" id="serie" placeholder="N. serie" />
+              <button type="button" id="btn-form">Registrar cañon <i class="fas fa-eye fa-sm"></i></button>
             </form>
           </div>
           <!-- FIN FORMULARIO -->
