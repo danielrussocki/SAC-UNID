@@ -11,4 +11,7 @@
     <ul>
         <li><a href='/modulos/niveles/index.php/'><i class="fas fa-level-up-alt"></i> Niveles</a></li>
     </ul>
+    <ul>
+        <li><a href='/modulos/servicios/index.php/'><i class="fas fa-clipboard-check"></i> Servicios</a></li>
+    </ul>
 </aside>
