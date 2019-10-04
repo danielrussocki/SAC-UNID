@@ -20,7 +20,7 @@ $(document).ready(function () {
             $("#status").val(respuesta.status);
             obj = {
                 accion: "updateNivel",
-                Nivel: id
+                nivel: id
             };
         }, "JSON"
         );
