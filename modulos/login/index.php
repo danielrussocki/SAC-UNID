@@ -35,7 +35,7 @@
             id="inputPassword"
           />
           <div class="box">
-            <input type="checkbox" name="recordar" id="recordar" />
+            <input type="checkbox" name="recordar" id="inputRemember" />
             <label for="recordar">Recordar credenciales</label>
           </div>
           <button type="button" id="btn-login">Login</button>
@@ -46,6 +46,7 @@
       </div>
     </div>
     <script src="/vendor/components/jquery/jquery.min.js"></script>
+    <script src="/vendor/components/jquery-cookie/jquery.cookie.js"></script>
     <script
       src="/vendor/fortawesome/font-awesome/js/all.js"
       data-auto-replace-svg="nest"

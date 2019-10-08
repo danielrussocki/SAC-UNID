@@ -1,7 +1,15 @@
 $(document).ready(function() {
+  var remember = $.cookie("remember");
+  if (remember == "true") {
+    var username = $.cookie("username");
+    var password = $.cookie("password");
+    $("#inputEmail").attr("value", username);
+    $("#inputPassword").attr("value", password);
+    $("#inputRemember").prop("checked", remember);
+  }
   $("#btn-login").click(function() {
     let obj = {
-      accion: "login"
+      accion: "login",
     };
     $("#login-form")
       .find("input")
@@ -12,6 +20,15 @@ $(document).ready(function() {
           obj[$(this).prop("name")] = $(this).prop("checked");
         }
       });
+    if (obj.recordar == true) {
+      $.cookie("username", obj.usuario, { expires: 30 });
+      $.cookie("password", obj.password, { expires: 30 });
+      $.cookie("remember", true, { expires: 30 });
+    } else {
+      $.cookie("username", null);
+      $.cookie("password", null);
+      $.cookie("remember", false);
+    }
     $.post(
       "/modulos/login/consultas.php",
       obj,
@@ -22,7 +39,7 @@ $(document).ready(function() {
             text: "¿Deseas iniciar sesión?",
             icon: "success",
             buttons: true,
-            ConfirmButtonText: true
+            ConfirmButtonText: true,
           }).then(willLogin => {
             if (willLogin) {
               window.location.href = "/index.php";
@@ -49,7 +66,7 @@ $(document).ready(function() {
     $("form").animate(
       {
         height: "toggle",
-        opacity: "toggle"
+        opacity: "toggle",
       },
       "slow"
     );
