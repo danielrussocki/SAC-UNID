@@ -5,7 +5,8 @@
         "components/bootstrap": "4.3.1",
         "fortawesome/font-awesome": "5.11.2",
         "phpmailer/phpmailer": "~6.1",
-        "fullcalendar/fullcalendar": "*"
+        "fullcalendar/fullcalendar": "*",
+        "components/jquery-cookie":"1.4.1.2"
     },
     "config": {
         "component-dir": "vendor"
