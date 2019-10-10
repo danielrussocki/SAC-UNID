@@ -53,18 +53,26 @@
                         $servicios = $db->select("servicios","*"); 
                         if($servicios)
                         { 
+                            $numero = 1;
                             foreach ($servicios as $servicio) 
                             { 
                         ?>
                         <tr>
-                            <th scope="row"><?php echo $servicio['id']; ?></th>
+                            <th scope="row"><?php echo $numero; ?></th>
                             <td><?php echo utf8_encode($servicio['nombre']); ?></td>
-                            <td><?php echo $servicio['status']; ?></td>
+                            <td><?php
+                                if($servicio['status'] == 1){
+                                    echo "Activo"; 
+                                }else{
+                                    echo "Inactivo";
+                                }
+                            ?></td>
                             <td>
                                 <a href="#" data="<?php echo $servicio['id']?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
                                 <a href="#" data="<?php echo $servicio['id']?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
                             </td>
                         <?php
+                            $numero = $numero + 1;
                             }
                         }else{
                             echo "<script>errorAlert()</script>";
