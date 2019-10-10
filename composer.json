@@ -9,6 +9,6 @@
         "components/jquery-cookie":"1.4.1.2"
     },
     "config": {
-        "component-dir": "vendor"
+        "component-dir": "/vendor"
     }
 }
