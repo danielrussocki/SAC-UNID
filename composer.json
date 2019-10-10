@@ -4,10 +4,10 @@
         "catfan/medoo": "1.7.3",
         "components/bootstrap": "4.3.1",
         "fortawesome/font-awesome": "5.11.2",
-        "fullcalendar/fullcalendar": "*",
-        "components/jquery-cookie":"1.4.1.2"
+        "phpmailer/phpmailer": "~6.1",
+        "fullcalendar/fullcalendar": "*"
     },
     "config": {
-        "component-dir": "/vendor"
+        "component-dir": "vendor"
     }
 }
