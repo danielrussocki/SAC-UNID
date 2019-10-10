@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 /composer.lock
 /vendor
+composer.phar
