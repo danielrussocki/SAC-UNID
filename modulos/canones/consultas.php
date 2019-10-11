@@ -1,5 +1,8 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
+session_start();
+error_reporting(0);
+$varsesion = $_SESSION['email'];
 //Recibir variable post
 switch ($_POST["accion"]) {
 
@@ -25,6 +28,9 @@ function eliminar_canon(){
 	global $db;
 	$respuesta = [];
 	$canon_e = $db->delete("canones",["id_can" => $_POST["canon"]]);
+	$varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Canones", "fecha_hora"=>$fecha]);
 
 		if ($canon_e) {
 			$respuesta["status"] = 1;
@@ -42,6 +48,7 @@ function insertar_canon(){
 	$entrada = $_POST['entrada'];
 	$control = $_POST['control'];
 	$serie = $_POST['serie'];
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	if(
 		$nombre != '' &&
 		$status != '' &&
@@ -63,6 +70,10 @@ function insertar_canon(){
 					"control_can"=>$control,
 					"serie_can"=>$serie
 				]);
+				$varsesion= $_SESSION['email'];
+
+				$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Canones", "fecha_hora"=>$fecha]);
+
 			$canon_e ? $respuesta["status"] = 1 : $respuesta["status"] = 0;
 		}
 	} else {
@@ -85,6 +96,7 @@ function update_canon(){
 	$control = $_POST['control'];
 	$serie = $_POST['serie'];
 	$id = $_POST['canon'];
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	$respuesta = [];
 	if(
 		$nombre != '' &&
@@ -109,10 +121,15 @@ function update_canon(){
 				"control_can"=>$control,
 				"serie_can"=>$serie
 			], ["id_can" => $id]);
+
+			$varsesion= $_SESSION['email'];
+
+			$db->insert("logs",["id_logs"=>"", "mensaje"=>"El usuario $varsesion actualizo en el modulo Canones", "fecha_hora"=>$fecha]);
 			$canon_e ? $respuesta["status"] = 1 : $respuesta["status"] = 0;
 		}
 	} else {
 		$respuesta["status"] = 3;
+		
 	}
 	echo json_encode($respuesta);
 }

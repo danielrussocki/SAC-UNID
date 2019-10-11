@@ -14,9 +14,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/estilo.css" />
     <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+    <link rel ="stlylesshet" hreff="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css"/>
     <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
+    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+
     <title>Entradas</title>
 </head>
 
@@ -39,7 +42,7 @@
                 </div>
             </div>
             <div class="info">
-                <table class="table">
+            <table id="table_id" class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>

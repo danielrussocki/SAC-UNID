@@ -6,7 +6,9 @@
         "fortawesome/font-awesome": "5.11.2",
         "phpmailer/phpmailer": "~6.1",
         "fullcalendar/fullcalendar": "*",
-        "components/jquery-cookie":"1.4.1.2"
+        "components/jquery-cookie":"1.4.1.2",
+        "datatables/datatables":"1.10.19"
+
     },
     "config": {
         "component-dir": "/vendor"

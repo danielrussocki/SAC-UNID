@@ -1,5 +1,8 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
+session_start();
+error_reporting(0);
+$varsesion = $_SESSION['email'];
 
 if ($_POST) {
     switch ($_POST["accion"]) {
@@ -27,6 +30,7 @@ if ($_POST) {
 
     function insertUsuario(){
         global $db;
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         $respuesta = [];
         $duplicate = false;
         if($_POST["matricula"]  != ""  && $_POST["nombre"]  != ""  && $_POST["telefono"]  != ""  && $_POST["email"]  != "" && 
@@ -48,6 +52,9 @@ if ($_POST) {
                     "status_usr" => "1",
                     "password_usr" => $_POST["contraseña"]
                     ]); 
+                    $varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Usuarios", "fecha_hora"=>$fecha]);
                     if($usuarios){
                             $respuesta["status"] = 1;
                     } else{
@@ -66,6 +73,7 @@ if ($_POST) {
 
 function updateUsuario($id, $matricula){
     global $db;
+    $fecha= strftime("%y-%m-%d %H:%M:%S");
     $respuesta = [];
     $duplicate = false;
     if($_POST["matricula"]  != ""  && $_POST["nombre"]  != ""  && $_POST["telefono"]  != ""  && $_POST["email"]  != "" && 
@@ -94,6 +102,9 @@ function updateUsuario($id, $matricula){
                 [
                     "id_usr" => $id
                 ]);
+                $varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Usuarios", "fecha_hora"=>$fecha]);
                 if($usuarios){
                         $respuesta["status"] = 1;
                 } else{
@@ -128,10 +139,14 @@ function updateUsuario($id, $matricula){
      
     function deleteUsuario($id){
         global $db;
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         $respuesta = [];
         $usuarios = $db -> delete("usuarios", [
             "id_usr"=> $id
             ]);
+            $varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Usuarios", "fecha_hora"=>$fecha]);
             if($usuarios){
                 $respuesta["status"]=1;
                 echo json_encode($respuesta);

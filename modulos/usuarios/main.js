@@ -1,6 +1,8 @@
 $(document).ready(function() {
+  $('#table_id').DataTable();
+  
   var obj = {};
-
+  
   $("#btn-new").click(function() {
     obj = {
       accion: "insertUsuario"

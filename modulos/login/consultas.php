@@ -1,6 +1,8 @@
 <?php
 	require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
-
+	session_start();
+	error_reporting(0);
+	$varsesion = $_SESSION['email'];
 	if ($_POST) {
 		switch ($_POST["accion"]) {
 			case 'login':
@@ -19,6 +21,7 @@
 	function login(){
 		global $db;
 		$respuesta = [];
+		$fecha= strftime("%y-%m-%d %H:%M:%S");
 
 		if ($_POST['usuario'] !=  "") {	
 
@@ -55,6 +58,7 @@
 
 	function register(){
 		global $db;
+		$fecha= strftime("%y-%m-%d %H:%M:%S");
 		$respuesta = [];
 		$duplicate = false;
 		
@@ -81,6 +85,10 @@
                     	"status_usr" => "0",
                     	"password_usr" => $_POST["contraseña"]
 						]);
+						
+						$varsesion= $_SESSION['email'];
+
+				$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Login", "fecha_hora"=>$fecha]);
 						 
                     		if ($usuarios) {
 								//Envio de correo

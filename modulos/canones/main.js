@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  $('#table_id').DataTable();
   let obj = {};
   $("#btn-new").click(function() {
     obj = {
