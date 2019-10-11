@@ -23,4 +23,7 @@
     <ul>
         <li><a href='/modulos/salones/index.php/'><i class="fas fa-archway"></i> Salones</a></li>
     </ul>
+    <ul>
+        <li><a href='/modulos/logs/index.php/'><i ></i> Logs</a></li>
+    </ul>
 </aside>

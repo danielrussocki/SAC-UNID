@@ -27,6 +27,7 @@ if ($_POST) {
     function insertClass(){
         global $db;
         $respuesta = [];
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         $duplicate = false;
         if($_POST["nombre"]  != "" && $_POST["id_grados"]  != "" && $_POST["tiene_canones"]  != "")
         {
@@ -43,6 +44,9 @@ if ($_POST) {
                     "tiene_canon" => $_POST["tiene_canones"],
                     "status" => "1",
                     ]); 
+                    $varsesion= $_SESSION['email'];
+
+				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Salones", "fecha_hora"=>$fecha]);
                     if($salon){
                             $respuesta["status"] = 1;
                     } else{
@@ -62,6 +66,7 @@ if ($_POST) {
 function updateClass($id_salones, $nombre){
     global $db;
     $respuesta = [];
+    $fecha= strftime("%y-%m-%d %H:%M:%S");
     $duplicate = false;
     if($_POST["nombre"]  != "" && $_POST["id_grados"]  != "" && $_POST["tiene_canones"]  != "") { 
             if($nombre == $_POST["nombre"]){
@@ -84,6 +89,9 @@ function updateClass($id_salones, $nombre){
                 [
                     "id_salones" => $id_salones
                 ]);
+                $varsesion= $_SESSION['email'];
+
+				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Salones", "fecha_hora"=>$fecha]);
                 if($nombres){
                         $respuesta["status"] = 1;
                 } else{
@@ -117,7 +125,11 @@ function updateClass($id_salones, $nombre){
     function deleteClass($id_salon){
         global $db;
         $respuesta = [];
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         $salones = $db->delete("salones", ["id_salones" => $id_salon]);
+        $varsesion= $_SESSION['email'];
+
+				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Salones", "fecha_hora"=>$fecha]);
             if($salones){
                 $respuesta["status"]=1;
                 echo json_encode($salones);

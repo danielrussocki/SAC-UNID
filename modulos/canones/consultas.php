@@ -26,11 +26,12 @@ switch ($_POST["accion"]) {
 
 function eliminar_canon(){
 	global $db;
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	$respuesta = [];
 	$canon_e = $db->delete("canones",["id_can" => $_POST["canon"]]);
 	$varsesion= $_SESSION['email'];
 
-		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Canones", "fecha_hora"=>$fecha]);
+	$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Canones", "fecha_hora"=>$fecha]);
 
 		if ($canon_e) {
 			$respuesta["status"] = 1;

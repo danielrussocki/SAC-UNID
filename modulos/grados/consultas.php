@@ -1,5 +1,8 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
+session_start();
+error_reporting(0);
+$varsesion = $_SESSION['email'];
 
 if ($_POST) {
     switch ($_POST["accion"]) {
@@ -28,6 +31,7 @@ if ($_POST) {
         global $db;
         $respuesta = [];
         $duplicate = false;
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         if($_POST["nombre"]  != "")
         {
             $grados = $db->select("grados","nombre");
@@ -41,6 +45,9 @@ if ($_POST) {
                     "nombre" => $_POST["nombre"],
                     "status" => "1",
                     ]); 
+                    $varsesion= $_SESSION['email'];
+
+				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Grados", "fecha_hora"=>$fecha]);
                     if($grados){
                             $respuesta["status"] = 1;
                     } else{
@@ -60,6 +67,7 @@ if ($_POST) {
 function updateGrades($id_grados, $nombre){
     global $db;
     $respuesta = [];
+    $fecha= strftime("%y-%m-%d %H:%M:%S");
     $duplicate = false;
     if($_POST["nombre"]  != "") { 
             if($id_grados == $_POST["nombre"]){
@@ -79,6 +87,9 @@ function updateGrades($id_grados, $nombre){
                 [
                     "id_grados" => $id_grados
                 ]);
+                $varsesion= $_SESSION['email'];
+
+				$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Grados", "fecha_hora"=>$fecha]);
                 if($grados){
                         $respuesta["status"] = 1;
                 } else{
@@ -109,10 +120,14 @@ function updateGrades($id_grados, $nombre){
      //okokok
     function deleteGrades($id_grados){
         global $db;
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         $respuesta = [];
         $grados = $db -> delete("grados",[
             "id_grados"=> $_POST["grado"]
             ]);
+            $varsesion= $_SESSION['email'];
+
+				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Grados", "fecha_hora"=>$fecha]);
             if($grados){
                 $respuesta["status"]=1;
                 echo json_encode($respuesta);
