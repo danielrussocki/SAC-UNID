@@ -12,12 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/estilo.css" />
-    <link rel ="stlylesshet" hreff="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+    <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
     <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
-    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
 
     <title>Usuarios</title>
   </head>
@@ -41,17 +40,17 @@
         </div>
         <div class="info">
           <!-- TABLA -->
-          <table id="table_id" class="table">
-            <thead class="thead-dark">
+          <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+            <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Matricula</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Email</th>
-                <th scope="col">Nivel</th>
-                <th scope="col">Status</th>
-                <th scope="col">Acciones</th>
+                <th>#</th>
+                <th>Matricula</th>
+                <th>Nombre</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Nivel</th>
+                <th>Status</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -61,7 +60,7 @@
                       foreach ($usuarios as $usuario) {
                ?>
               <tr>
-                <th scope="row"><?php echo $usuario['id_usr']; ?></th>
+                <th><?php echo $usuario['id_usr']; ?></th>
                 <td ><?php echo $usuario['matricula_usr']; ?></td>
                 <td><?php echo utf8_encode($usuario['nombre_usr']); ?></td>
                 <td><?php echo $usuario['telefono_usr']; ?></td>
@@ -98,10 +97,13 @@
         </div>
       </div>
     </section>
-    <footer>
-      <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
-    </footer>
+    <section>
+      <footer>
+        <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
+      </footer>
+    </section>
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
     <script src="/modulos/usuarios/main.js"></script>
   </body>

@@ -1,6 +1,6 @@
 function newAlert(){
     $('input').val('');
-    $('.table').fadeOut(20);
+    $('.dataTables_wrapper').fadeOut(20);
     $('.form').fadeIn(200);
     $('.boton-cancelar').show();
     $('.boton-cancelar a').show();
@@ -8,7 +8,7 @@ function newAlert(){
 
 function cancelAlert(){
     $('input').val('');
-    $('.table').fadeIn(200);
+    $('.dataTables_wrapper').fadeIn(200);
     $('.form').fadeOut(20);
     $('.boton-cancelar').hide();
     $('.boton-cancelar a').hide();

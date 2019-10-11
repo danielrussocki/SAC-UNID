@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  $('#table_id').DataTable();
   
   var obj = {};
   
@@ -128,5 +127,8 @@ $(document).ready(function() {
       default:
         break;
     }
+  });
+  $('#table_id').DataTable({
+    "lengthChange": false
   });
 });
