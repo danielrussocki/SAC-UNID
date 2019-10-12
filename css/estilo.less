@@ -14,7 +14,8 @@
 }
 
 body {
-  background: @backbody;
+    background: @backbody;
+    min-height: 100vh;
 }
 
 //ESTILOS INDEX
@@ -24,11 +25,28 @@ body {
 }
 
 .wrapper .sidebar {
-  position: fixed;
-  width: 15%;
-  height: 100%;
-  background: @backsidebar;
-  padding: 30px 0;
+    position: fixed;
+    width: 15%;
+    height: 100%;
+    background: @backsidebar;
+    overflow-x: hidden;
+    // overflow-y: scroll;
+    .icon-container{
+        display: inline-block;
+        width: 22px;
+    }
+    a p{
+        box-sizing: border-box;
+    }
+    @media screen and (max-width:992px) {
+        width: 60px;
+        a{
+            text-align: center;
+        }
+        a p{
+            display: none;
+        }
+    }
 }
 
 .wrapper .sidebar h2 {
@@ -39,20 +57,26 @@ body {
 }
 
 .wrapper .sidebar ul li {
-  padding: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  border-top: 1px solid rgba(225, 225, 225, 0.05);
-  margin-bottom: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(225, 225, 225, 0.05);
+    margin-bottom: 0;
+    transition: background-color .42s;
 }
 
 .wrapper .sidebar ul li a {
-  color: #bdb8d7;
-  display: block;
-  text-decoration: none;
+    color: #bdb8d7;
+    display: block;
+    text-decoration: none;
+    padding: 12px;
+}
+
+.wrapper .sidebar p{
+    display: inline;
 }
 
 .wrapper .sidebar ul li:hover {
-  background: @backhoverul;
+    background: @backhoverul;
+    transition: background-color .4s;
 }
 
 .wrapper .sidebar ul li:hover a {
@@ -60,26 +84,38 @@ body {
 }
 
 .wrapper .contenedor-principal {
-  width: 100%;
-  margin-left: 15%;
+    width: 100%;
+    margin-left: 15%;
+    height: 74vh;
+    overflow: scroll;
+    @media screen and (max-width: 992px) {
+        margin-left: 60px;
+    }
 }
 
 .wrapper .contenedor-principal .header {
-  padding: 20px;
-  background: #fff;
-  color: @colorheader;
-  border-bottom: 1px solid #e0e4e8;
+    padding: 20px;
+    background: #fff;
+    color: @colorheader;
+    border-bottom: 1px solid #e0e4e8;
+    position: relative;
+    h3{
+        display: inline;
+    }
 }
 
-.wrapper .contenedor-principal .header .boton-nuevo {
-  background: #fff;
-  border-radius: 100%;
-  border: 2px solid #569e60;
-  width: 50px;
-  height: 50px;
-  right: 70px;
-  top: 15px;
-  position: absolute;
+.wrapper .contenedor-principal .header .boton-nuevo{
+    background: #fff;
+    border-radius: 100%;
+    border: 2px solid #569E60;
+    width: 50px;
+    height: 50px;
+    right: 70px;
+    top: 15px;
+    position: absolute;
+    @media screen and (max-width:576px){
+        right: 20px;
+    }
 }
 
 .wrapper .contenedor-principal .header .boton-nuevo a {
@@ -111,11 +147,11 @@ body {
   display: none;
 }
 
-.wrapper .contenedor-principal .header .boton-cancelar a {
-  display: none;
-  line-height: 47px;
-  margin: 0 5;
-  color: red;
+.wrapper .contenedor-principal .header .boton-cancelar a{
+    display: none;
+    line-height: 47px;
+    // margin: 0 5;
+    color: red;
 }
 
 .wrapper .contenedor-principal .header .boton-cancelar:hover {
@@ -127,75 +163,80 @@ body {
 }
 
 .wrapper .contenedor-principal .info {
-  margin: 20px;
-  color: @colorheader;
+    margin: 20px;
+    color: @colorheader;
 }
 
-.wrapper .contenedor-principal .info .form {
-  width: 360px;
-  padding: 4% 0 0;
-  margin: auto;
+.wrapper .contenedor-principal .info .form{
+    width: 360px;
+    padding: 4% 0 0;
+    margin: auto;
 }
 
-.wrapper .contenedor-principal .info .form input {
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
+.wrapper .contenedor-principal .info .form input{
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
-.wrapper .contenedor-principal .info .form .select_opt {
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
+.wrapper .contenedor-principal .info .form .select_opt{
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
-.wrapper .contenedor-principal .info .form button {
-  text-transform: uppercase;
-  outline: 0;
-  background: @backsidebar;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #fff;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
+.wrapper .contenedor-principal .info .form button{
+    text-transform: uppercase;
+    outline: 0;
+    background: @backsidebar;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
 }
 
-.wrapper .contenedor-principal .info .form button:hover {
-  background: @backhoverul;
+.wrapper .contenedor-principal .info .form button:hover{
+    background: @backhoverul;
 }
 
-.wrapper .contenedor-principal .info .form {
-  display: none;
+.wrapper .contenedor-principal .info .form{
+    display: none;
 }
 
-footer {
-  width: 100%;
-  height: 5%;
-  background: @backsidebar;
-  position: fixed;
-  bottom: 0;
-  color: #fff;
-  padding: 20px;
+footer{
+    width: 100%;
+    background: @backsidebar;
+    position: fixed;
+    bottom: 0;
+    color: #fff;
+    z-index: 9;
+    padding: 32px 0;
 }
 
-footer p {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
+footer p{
+    margin: 0 auto;
+    text-align: center;
+    @media screen and (max-width:576px){
+        font-size: 12px;
+    }
 }
 //FIN ESTILOS INDEX
+.navbar{
+    position: sticky !important;
+    z-index: 10;
+    top: 0;
+}

@@ -51,9 +51,13 @@ $(document).ready(function(){
       function(respuesta) {
         // $("#nombre").val(respuesta.id_can);
         $("#nombre").val(respuesta.nombre_can);
-        $("#status").val(respuesta.status_can);
-        $("#entrada").val(respuesta.entrada_can);
-        $("#control").val(respuesta.control_can);
+        // $("#status").val(respuesta.status_can);
+        respuesta.status_can == 1 ?
+        $("#stsOne").prop("checked",true) : $("#stsTwo").prop("checked",true);
+        $("#entrada").val(respuesta.id_entrada);
+        respuesta.control_can == 1 ?
+        $("#controlOne").prop("checked",true) : $("#controlTwo").prop("checked",true);
+        // $("#control").val(respuesta.control_can);
         $("#serie").val(respuesta.serie_can);
         obj = {
           accion: "updateCanon",
@@ -66,9 +70,16 @@ $(document).ready(function(){
   });
   $("#btn-form").click(function() {
     $("#canon-form")
-      .find("input")
+      .find("input, select")
       .map(function(i, e) {
-        obj[$(this).prop("name")] = $(this).val();
+        if($(this).prop("name") != 'control' && $(this).prop("name") != 'status'){
+          obj[$(this).prop("name")] = $(this).val();
+        } else if($(this).prop("name") == 'control'){
+          // console.log($('#controlOne').prop("checked"),$('#controlOne').val(),$('#controlTwo').val());
+          obj[$(this).prop("name")] = $('#controlOne').prop("checked");
+        } else if($(this).prop("name") == 'status'){
+          obj[$(this).prop("name")] = $('#stsOne').prop("checked");
+        }
       });
 
     switch (obj.accion) {
@@ -121,7 +132,7 @@ $(document).ready(function(){
         break;
     }
   });
-  $('#table_id').DataTable({
+  $('#table_lel').DataTable({
     "lengthChange": false
   });
-});ss
+});
