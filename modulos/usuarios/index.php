@@ -57,22 +57,38 @@
               <?php
                   $usuarios = $db->select("usuarios","*");
                   if($usuarios){
+                    $numero = 1;
                       foreach ($usuarios as $usuario) {
                ?>
               <tr>
-                <th><?php echo $usuario['id_usr']; ?></th>
+                <th scope="row"><?php echo $numero; ?></th>
                 <td ><?php echo $usuario['matricula_usr']; ?></td>
                 <td><?php echo utf8_encode($usuario['nombre_usr']); ?></td>
                 <td><?php echo $usuario['telefono_usr']; ?></td>
                 <td><?php echo $usuario['email_usr']; ?></td>
-                <td><?php echo $usuario['nivel_usr']; ?></td>
-                <td><?php echo $usuario['status_usr']; ?></td>
+                <td><?php
+                    if($usuario['nivel_usr'] == 1){
+                        echo "Alumno"; 
+                    }else if ($usuario['nivel_usr'] == 2){
+                        echo "Profesor";
+                    }else if ($usuario['nivel_usr'] == 3){
+                      echo "Coordinador";
+                  }
+                ?></td>    
+                <td><?php
+                    if($usuario['status_usr'] == 1){
+                        echo "Activo"; 
+                    }else{
+                        echo "Inactivo";
+                    }
+                ?></td>        
                 <td>
                   <a href="#" data="<?php echo $usuario['id_usr']?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a> 
                   <a href="#" data="<?php echo $usuario['id_usr']?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
                 </td>
               </tr>
               <?php
+              $numero = $numero + 1;
                       }
                   }else{
                     echo "<script>errorAlert()</script>";
@@ -89,7 +105,14 @@
               <input type="text" id="telefono" name="telefono" placeholder="Telefono" />
               <input type="text" id="email" name="email" placeholder="Email" />
               <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" />
-              <input type="hidden" id="status" name="status" value="1" name="status_usr" />
+              <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="status1" name="status">
+                            <label class="custom-control-label" for="status1">Inactivo</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="status2" name="status">
+                            <label class="custom-control-label" for="status2">Activo</label>
+                        </div>
               <button type="button" id="btn-form"></button>
             </form>
           </div>

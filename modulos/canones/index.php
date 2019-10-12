@@ -56,13 +56,20 @@
                         $canones = $db->select("canones","*");
                         if($canones)
                         {
+                            $numero = 1;
                             foreach ($canones as $canon)
                             {
               ?>
               <tr>
-                <th scope="row"><?php echo $canon['id_can']; ?></th>
+                <th scope="row"><?php echo  $numero; ?></th>
                 <td><?php echo utf8_encode($canon['nombre_can']); ?></td>
-                <td><?php echo $canon['status_can']; ?></td>
+                <td><?php
+                    if($canon['status_can'] == 1){
+                        echo "Activo"; 
+                    }else{
+                        echo "Inactivo";
+                    }
+                ?></td> 
                 <td><?php echo $canon['entrada_can']; ?></td>
                 <td><?php echo $canon['control_can']; ?></td>
                 <td><?php echo $canon['serie_can']; ?></td>
@@ -71,6 +78,7 @@
                   <a href="#" data="<?php echo $canon['id_can']; ?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
                 </td>
                 <?php
+                 $numero = $numero + 1;
                             }
                         }else{
                             echo "<script>errorAlert()</script>";

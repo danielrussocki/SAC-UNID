@@ -42,14 +42,17 @@ if ($_POST) {
                     $duplicate = true;
                 }
             } if (!$duplicate)       
-              {
+              { 
+                $status = $_POST['status'];
+                // $status != null ? $status = "1" : $status = "0";
+                $status ? $status = "1" :  $status = "0";
                 $usuarios = $db->insert('usuarios',[
                     "matricula_usr" => $_POST["matricula"],
                     "nombre_usr" => $_POST["nombre"],
                     "telefono_usr" => $_POST["telefono"],
                     "email_usr" => $_POST["email"],
                     "nivel_usr" => "1",
-                    "status_usr" => "1",
+                    "status_usr" => $status,
                     "password_usr" => $_POST["contraseña"]
                     ]); 
                     $varsesion= $_SESSION['email'];
@@ -90,13 +93,15 @@ function updateUsuario($id, $matricula){
         }
     } if (!$duplicate)       
           {
+            $status = $_POST['status'];
+            $status ? $status = "1" :  $status = "0";
             $usuarios = $db->update("usuarios", [
                 "matricula_usr" => $_POST["matricula"],
                 "nombre_usr" => $_POST["nombre"],
                 "telefono_usr" => $_POST["telefono"],
                 "email_usr" => $_POST["email"],
                 "nivel_usr" => 1,
-                "status_usr" => 1,
+                "status_usr" => $status,
                 "password_usr" => $_POST["contraseña"]
             ],
                 [

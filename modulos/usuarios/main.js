@@ -1,7 +1,6 @@
 $(document).ready(function() {
-  
   var obj = {};
-  
+
   $("#btn-new").click(function() {
     obj = {
       accion: "insertUsuario"
@@ -24,6 +23,12 @@ $(document).ready(function() {
         $("#telefono").val(respuesta.telefono);
         $("#email").val(respuesta.email);
         $("#contraseña").val(respuesta.contraseña);
+        if (respuesta.status == "1") {
+          $("#status2").prop("checked", true);
+        } else if (respuesta.status == "0") {
+          $("#status1").prop("checked", true);
+        }
+
         obj = {
           accion: "updateUsuario",
           usuario: id,
@@ -74,6 +79,10 @@ $(document).ready(function() {
       .find("input")
       .map(function(i, e) {
         obj[$(this).prop("name")] = $(this).val();
+
+        if ($(this).prop("type") == "radio") {
+          obj[$(this).prop("name")] = $(this).prop("checked");
+        }
       });
 
     switch (obj.accion) {
@@ -128,7 +137,7 @@ $(document).ready(function() {
         break;
     }
   });
-  $('#table_id').DataTable({
-    "lengthChange": false
+  $("#table_id").DataTable({
+    lengthChange: false
   });
 });
