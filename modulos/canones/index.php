@@ -64,13 +64,28 @@
                 <td><?php echo utf8_encode($canon['nombre_can']); ?></td>
                 <td><?php
                     if($canon['status_can'] == 1){
-                        echo "Activo"; 
+                        echo "Activo";
                     }else{
                         echo "Inactivo";
                     }
-                ?></td> 
-                <td><?php echo $canon['id_entrada']; ?></td>
-                <td><?php echo $canon['control_can']; ?></td>
+                ?></td>
+                <td>
+                  <?php
+                  $entShow = $db->get('entradas','nombre',['id'=>$canon['id_entrada']]);
+                  if($entShow){
+                    echo $entShow;
+                  }
+                  ?>
+                </td>
+                <td>
+                  <?php
+                    if($canon['control_can'] == 1){
+                      echo "Tiene control";
+                    } else {
+                      echo "No tiene control";
+                    }
+                  ?>
+                </td>
                 <td><?php echo $canon['serie_can']; ?></td>
                 <td>
                   <a href="#" data="<?php echo $canon['id_can']; ?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
