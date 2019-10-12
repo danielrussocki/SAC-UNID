@@ -48,7 +48,6 @@ function insertApartado()
 			"status" => $status
 		]);
 		$respuesta["status"] = 1;
-		
 		$mail = new PHPMailer;
 		try {
 			$mail->isSMTP();

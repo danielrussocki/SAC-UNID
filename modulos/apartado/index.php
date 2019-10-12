@@ -3,8 +3,6 @@ require_once $_SERVER["DOCUMENT_ROOT"] . 'includes/database.php';
 session_start();
 error_reporting(0);
 $varsesion = $_SESSION['email'];
-
-print_r($_SESSION['id']);
 if (isset($varsesion)) {
     ?>
     <!DOCTYPE html>
@@ -132,7 +130,19 @@ if (isset($varsesion)) {
                         <form class="form-register" id="apartado-form">
                             <div class="row">
                                 <div class="col">
-                                    <input type="hidden" name="usuario" id="usuario" value="<?php print_r($_SESSION['id']); ?>">
+                                    <select id="usuario" name="usuario" class="select_opt">
+                                        <option value="">Usuario</option>
+                                        <?php
+                                            $usuarios = $db->select("usuarios", "*");
+                                            if ($usuarios) {
+                                                foreach ($usuarios as $usuario) {
+                                                    echo "<option value='$usuario[id_usr]'>$usuario[nombre_usr]</option>";
+                                                }
+                                            } else {
+                                                echo "<script>errorAlert()</script>";
+                                            }
+                                            ?>
+                                    </select>
                                     <input type="date" name="fecha_inicio" id="fecha_inicio">
                                     <input type="date" name="fecha_fin" id="fecha_fin">
                                     <input type="time" name="hora_inicio" id="hora_inicio">
