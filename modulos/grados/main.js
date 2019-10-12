@@ -1,30 +1,38 @@
 $(document).ready(function () {
   var obj = {};
 
-  $("#btn-new").click(function () {
-      obj = {
-          accion: "insertGrades"
-      };
-      $("#user-form")[0].reset();
-      $("#btn-form").text("Añadir Grado");
+  $("#btn-new").click(function() {
+    obj = {
+      accion: "insertGrades"
+    };
+    $("#btn-new").hide();
+    $("#btn-form").text("Añadir Grado ");
   });
 
-  $(".btn-edit").click(function () {
-      let id = $(this).attr("data");
-      obj = {
-          accion: "getGrades",
-          grados: id
-      };
-      $.post("/modulos/grados/consultas.php", obj, function (respuesta) {
-          $("#nombre").val(respuesta.nombre);
-          $("#status").val(respuesta.status);
-          obj = {
-              accion: "updateGrades",
-              grados: id
-          };
-      }, "JSON"
-      );
-      $("#btn-form").text("Editar Grados");
+  $("#btn-cancel").click(function(){
+    $("#btn-new").show();
+  });
+
+  $(".btn-edit").click(function() {
+    let id = $(this).attr("data");
+    obj = {
+      accion: "getGrades",
+      grados: id
+    };
+    $.post(
+      "/modulos/grados/consultas.php",
+      obj,
+      function(respuesta) {
+        $("#nombre").val(respuesta.nombre);
+        obj = {
+          accion: "updateGrades",
+          grados: id,
+          nombre_original: respuesta.nombre
+        };
+      },
+      "JSON"
+    );
+    $("#btn-form").text("Editar Grados");
   });
 
   $(".btn-delete").click(function () {

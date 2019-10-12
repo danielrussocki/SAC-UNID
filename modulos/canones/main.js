@@ -5,6 +5,10 @@ $(document).ready(function(){
       accion: "insertCanon"
     };
     $("#btn-form").text("Añadir cañón");
+    $("#btn-new").hide();
+  });
+  $("#btn-cancel").click(function(){
+      $("#btn-new").show();
   });
   $(".btn-delete").click(function() {
     let id = $(this).attr("data");

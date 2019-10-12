@@ -25,34 +25,34 @@
         Include_once $_SERVER["DOCUMENT_ROOT"].'modulos/shared/navbar.php';
     ?>
     <section class="wrapper">
-        <?php
-            Include_once $_SERVER["DOCUMENT_ROOT"].'modulos/shared/sidebar.php';
-        ?>
-        <div class="contenedor-principal">
-            <div class="header">
-                <h3>Salones</h3>
-                <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
-                    <a href="#"><i class="fas fa-eye fa-lg" title="Añadir nuevo Salon"></i></a>
-                </div>
-                <div class="boton-cancelar" onClick="cancelAlert()">
-                    <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
-                </div>
-            </div>
-            <div class="info">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                          <th scope="col">No.</th>
-                          <th scope="col">Salon</th>
-                          <th scope="col">Grado</th>
-                          <th scope="col">Tiene_Cañon</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                         $salones = $db->select("salones","*");
+      <?php
+         Include_once $_SERVER["DOCUMENT_ROOT"].'modulos/shared/sidebar.php';
+      ?>
+      <div class="contenedor-principal">
+        <div class="header">
+          <h3>Salones</h3>
+          <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
+            <a href="#"><i class="fas fa-eye fa-lg" title="Añadir nuevo Salon"></i></a>
+          </div>
+          <div class="boton-cancelar" id="btn-cancel" onClick="cancelAlert()">
+            <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
+          </div>
+        </div>
+        <div class="info">
+        <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Salon</th>
+                <th>Grado</th>
+                <th>Tiene_Cañon</th>
+                <th>Status</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                        $salones = $db->select("salones","*");
                         if($salones)
                         {
                             foreach ($salones as $sal => $salon)

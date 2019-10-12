@@ -5,7 +5,12 @@ $(document).ready(function() {
     obj = {
       accion: "insertUsuario"
     };
+    $("#btn-new").hide();
     $("#btn-form").text("Añadir usuario ");
+  });
+
+  $("#btn-cancel").click(function(){
+    $("#btn-new").show();
   });
 
   $(".btn-edit").click(function() {

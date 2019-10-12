@@ -6,9 +6,14 @@ $(document).ready(function () {
         obj = {
             accion: "insertNivel"
         };
+        $("#btn-new").hide();
         $("#nivel-form")[0].reset();
         $("#btn-form").text("Registrar Nivel");
     });
+    
+    $("#btn-cancel").click(function(){
+        $("#btn-new").show();
+      });
 
     $(".btn-edit").click(function () {
         let id = $(this).attr("data");

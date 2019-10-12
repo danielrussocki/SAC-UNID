@@ -6,6 +6,10 @@ $(document).ready(function () {
         };
         $("#apartado-form")[0].reset();
         $("#btn-form").text("Apartar cañon");
+        $("#btn-new").hide();
+    });
+    $("#btn-cancel").click(function(){
+        $("#btn-new").show();
     });
     $(".btn-delete").click(function () {
         let id = $(this).attr("data");
