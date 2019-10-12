@@ -107,5 +107,7 @@ $(document).ready(function () {
               break;
       }
   });
-
+  $('#table_salones').DataTable({
+    "lengthChange": false
+  });
 });
