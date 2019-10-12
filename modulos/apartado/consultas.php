@@ -2,7 +2,8 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . 'includes/database.php';
 require $_SERVER["DOCUMENT_ROOT"] . 'vendor/autoload.php';
 session_start();
-
+error_reporting(0);
+$varsesion = $_SESSION['email'];
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -32,7 +33,7 @@ function insertApartado()
 	$status = 0;
 	$fecha= strftime("%y-%m-%d %H:%M:%S");
 
-	if (empty($usuario) && empty($fecha_inicio) && ($fecha_fin) && ($hora_inicio) && ($hora_fin) && ($servicio) && ($canon) && ($salon)) {
+	if (empty($usuario) || empty($fecha_inicio) || empty($fecha_fin) || empty($hora_inicio) || empty($hora_fin) || empty($servicio) || empty($canon) || empty($salon)) {
 		$respuesta["status"] = 0;
 	} else {
 		$db->insert("reservas", [
@@ -49,25 +50,26 @@ function insertApartado()
 			"status" => $status
 		]);
 		$varsesion= $_SESSION['email'];
-
 		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Apartado", "fecha_hora"=>$fecha]);
 		$respuesta["status"] = 1;
 		$mail = new PHPMailer;
+		$mail->CharSet = "utf-8";
+		global $error;
 		try {
 			$mail->isSMTP();
-			$mail->Host = 'smtp.sendgrid.net';
-			$mail->SMTPAuth = true;
-			$mail->Username = 'apikey';
-			$mail->Password = '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';
-			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-			$mail->Port = 587;
-
-			$mail->setFrom('apartado@canones.com', 'Sistema Apartado Cañones'); //send
-			$mail->addAddress($_SESSION['email'], $_SESSION['nombre']);  //recive
-
+			$mail->SMTPDebug = 0; 
+			$mail->SMTPAuth = true; 
+			$mail->Host = 'smtp.gmail.com';
+			$mail->Port = 465; 
+			$mail->Username = 'sistemacanones@smoothoperators.com.mx';  
+			$mail->Password = '&7yQ=b&<';
+			$mail->SMTPSecure = 'ssl';
+			$email_from = "sistemacanones@smoothoperators.com.mx";
+			$from_name = "Sistema Cañones";
+			$mail->SetFrom($email_from, $from_name);
 			$mail->Subject = 'Sistema apartado cañones';
 			$mail->msgHTML(file_get_contents('message.html'), __DIR__);
-			$mail->AltBody = 'La logia Corp.';
+			$mail->addAddress($_SESSION['email'], $_SESSION['nombre']);  //recive
 
 			$mail->send();
 			if (!$mail) {
@@ -105,7 +107,7 @@ function updateApartado($id)
 	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	$respuesta = [];
 	extract($_POST);
-	if (empty($usuario) && empty($fecha_inicio) && ($fecha_fin) && ($hora_inicio) && ($hora_fin) && ($servicio) && ($canon) && ($salon)) {
+	if (empty($usuario) || empty($fecha_inicio) || empty($fecha_fin) || empty($hora_inicio) || empty($hora_fin) || empty($servicio) || empty($canon) || empty($salon)) {
 		$respuesta["status"] = 0;
 	} else {
 		$db->update("reservas", [
@@ -124,9 +126,8 @@ function updateApartado($id)
 			"id_apartado" => $id
 		]);
 
-		$varsesion= $_SESSION['email'];
 		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Apartado", "fecha_hora"=>$fecha]);
-		$respuesta["respuesta"] = 1;
+		$respuesta["status"] = 1;
 	}
 	echo json_encode($respuesta);
 }
