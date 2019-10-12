@@ -1,9 +1,5 @@
 <?php
-require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
-session_start();
-error_reporting(0);
-$varsesion = $_SESSION['email'];
-
+ require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
 if ($_POST) {
     switch ($_POST["accion"]) {
         case 'insertGrades':
@@ -11,7 +7,7 @@ if ($_POST) {
             break;
 
         case 'updateGrades':
-        updateGrades($_POST["grados"], $_POST["nombre"]);
+        updateGrades($_POST["grados"]);
         break;
 
         case 'getGrades':
@@ -26,115 +22,61 @@ if ($_POST) {
             break;
     }
 }
-  //okokok
+
     function insertGrades(){
         global $db;
-        $respuesta = [];
-        $duplicate = false;
         $fecha= strftime("%y-%m-%d %H:%M:%S");
-        if($_POST["nombre"]  != "")
-        {
-            $grados = $db->select("grados","nombre");
-            foreach ($grados as $grado) {
-                if($grados == $_POST["nombre"]){
-                    $duplicate = true;
-                }
-            } if (!$duplicate)       
-              {
-                $grados = $db->insert('grados',[
-                    "nombre" => $_POST["nombre"],
-                    "status" => "1",
-                    ]); 
-                    $varsesion= $_SESSION['email'];
+        $respuesta = [];
+        $nombre = $_POST['nombre'];
+        $status = $_POST['status'];
 
-				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Grados", "fecha_hora"=>$fecha]);
-                    if($grados){
-                            $respuesta["status"] = 1;
-                    } else{
-                        $respuesta["status"] = 0;
-                    }
-                    echo json_encode($respuesta);
-                } else{
-                    $respuesta["status"]=2;
-                    echo json_encode($respuesta);
-                }  
-    }else{
-        $respuesta["status"]=0;
+        if (empty($nombre) && empty($status)) {
+            $respuesta["status"] = 0;
+        }else{
+            $db->insert("grados",[
+                "nombre" => $nombre,
+                "status" => $status
+            ]);
+            $respuesta["status"] = 1;
+        }
         echo json_encode($respuesta);
     }
-}
 
-function updateGrades($id_grados, $nombre){
-    global $db;
-    $respuesta = [];
-    $fecha= strftime("%y-%m-%d %H:%M:%S");
-    $duplicate = false;
-    if($_POST["nombre"]  != "") { 
-            if($id_grados == $_POST["nombre"]){
-                $duplicate = false;
-            }else{
-        $grados = $db->select("grados","nombre");
-        foreach ($grados as $nom) {
-            if($nom == $_POST["nombre"]){
-                $duplicate = true;
-            }
+    function updateGrades($id_grados){
+        global $db;
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
+        $nombre = $_POST['nombre'];
+        $status = $_POST['status'];
+
+        if (empty($nombre) && empty($status)) {
+            $respuesta["respuesta"] = 0;
+        }else{
+            $db->update("grados", [
+                "nombre" => $nombre,
+                "status" => $status
+            ], [
+                "id_grados" => $id_grados
+            ]);
+            $respuesta["respuesta"] = 1;
         }
-    } if (!$duplicate)       
-          {
-            $grados = $db->update("grados", [
-                "nombre" => $_POST["nombre"]
-            ],
-                [
-                    "id_grados" => $id_grados
-                ]);
-                $varsesion= $_SESSION['email'];
-
-				$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Grados", "fecha_hora"=>$fecha]);
-                if($grados){
-                        $respuesta["status"] = 1;
-                } else{
-                    $respuesta["status"] = 0;
-                }
-                echo json_encode($respuesta);
-            } else{
-                $respuesta["status"]=2;
-                echo json_encode($respuesta);
-            }  
-}else{
-    $respuesta["status"]=0;
-    echo json_encode($respuesta);
-}
-}
-
+        echo json_encode($respuesta);
+    }
 
     function getGrades($id_grados){
         global $db;
-        $respuesta = [];
+        $fecha= strftime("%y-%m-%d %H:%M:%S");
         $grados = $db->get("grados", "*", ["id_grados" => $id_grados]) ;
         $respuesta["nombre"] = $grados["nombre"];
-        $respuesta["status"] = 1;
-        
- 
+        $respuesta["status"] = $grados["status"];
         echo json_encode($respuesta);
     }
-     //okokok
+
     function deleteGrades($id_grados){
         global $db;
         $fecha= strftime("%y-%m-%d %H:%M:%S");
-        $respuesta = [];
-        $grados = $db -> delete("grados",[
-            "id_grados"=> $_POST["grado"]
-            ]);
-            $varsesion= $_SESSION['email'];
-
-				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Grados", "fecha_hora"=>$fecha]);
-            if($grados){
-                $respuesta["status"]=1;
-                echo json_encode($respuesta);
-            }else{
-                $respuesta["status"]=0;
-                echo json_encode($respuesta);
-            }
+        $db->delete("grados", ["id_grados" => $id_grados]);
+        $respuesta["status"] = 1;
+        echo json_encode($respuesta);
     }
-
+    
 ?>
