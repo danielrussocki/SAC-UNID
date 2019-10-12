@@ -19,7 +19,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
 
-    <title>Entradas</title>
+    <title>Servicios</title>
 </head>
 
 <body>

@@ -56,18 +56,25 @@
                         $niveles = $db->select("niveles","*"); 
                         if($niveles)
                         { 
+                            $num = 1;
                             foreach ($niveles as $nivel) 
                             { 
                         ?>
                         <tr>
                             <th scope="row"><?php echo $nivel['id']; ?></th>
                             <td><?php echo utf8_encode($nivel['nombre']); ?></td>
-                            <td><?php echo $nivel['status']; ?></td>
+                            <td><?php
+                                if($nivel['status'] == 1){
+                                    echo "Activo"; 
+                                }else{
+                                    echo "Inactivo";
+                                }?></td>
                             <td>
                                 <a href="#" data="<?php echo $nivel['id']?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
                                 <a href="#" data="<?php echo $nivel['id']?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
                             </td>
                         <?php
+                            $num = $num + 1;
                             }
                         }else{
                             echo "<script>errorAlert()</script>";
@@ -78,13 +85,17 @@
                 </table>
                 <!-- FORMULARIO -->
                 <div class="form">
-                    <form class="form-register" id="nivel-form">
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre" />
-                        <select id="status" name="status" class="select_opt">
-                            <option value="">Seleccione una opción: </option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
+                <form class="form-register" id="nivel-form">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nivel" />
+                    
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="status1" name="status">
+                        <label class="custom-control-label" for="status1">Inactivo</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="status2" name="status">
+                        <label class="custom-control-label" for="status2">Activo</label>
+                    </div>
                         <button type="button" id="btn-form">Registrar nivel <i class="fas fa-level-up-alt fa-sm"></i></button>
                     </form>
                 </div>

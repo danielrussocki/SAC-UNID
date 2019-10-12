@@ -18,7 +18,12 @@ $(document).ready(function () {
         };
         $.post("/modulos/entradas/consultas.php",obj,function (respuesta) {
                 $("#nombre").val(respuesta.nombre);
-                $("#status").val(respuesta.st);
+                if(respuesta.st == "1"){
+                    $("#status2").prop("checked",true);
+                } else if(respuesta.st == "0"){
+                    $("#status1").prop("checked",true);
+                }
+                
                 obj = {
                     accion: "updateEntrada",
                     entrada: id
@@ -59,9 +64,9 @@ $(document).ready(function () {
     $("#btn-form").click(function () {
         $("#entrada-form").find("input").map(function (i, e) {
                 obj[$(this).prop("name")] = $(this).val();
-            });
-        $("#entrada-form").find("select").map(function (i, e) {
-                obj[$(this).prop("name")] = $(this).val();
+                if($(this).prop("type") == "radio"){
+                    obj[$(this).prop("name")] = $(this).prop("checked");
+                }
             });
         switch (obj.accion) {
             case "insertEntrada":

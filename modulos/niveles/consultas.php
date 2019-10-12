@@ -27,28 +27,38 @@
      }
  }
 
- 	function insertNivel(){
-		global $db;
-		$respuesta = [];
-		$nombre = $_POST['nombre'];
-		$status = $_POST['status'];
-		$fecha= strftime("%y-%m-%d %H:%M:%S");
+ function insertNivel(){
+	global $db;
+	$respuesta = [];
+	$nombre = $_POST['nombre'];
+	$status = $_POST['status'];
+	$statu = 1;
+	$statua = 0;
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 
-		if (empty($nombre) && empty($status)) {
-			$respuesta["status"] = 0;
-		}else{
-			$db->insert("niveles",[
-				"nombre" => $nombre,
-				"status" => $status
-			]);
-			$varsesion= $_SESSION['email'];
+	if (empty($nombre)) {
+		$respuesta["status"] = 0;
+	}else if(!empty($nombre) && $status == "true"){
+		$db->insert("niveles",[
+			"nombre" => $nombre,
+			"status" => $statu
+		]);
+		$varsesion= $_SESSION['email'];
 
-			$db->insert("logs",["id_logs"=>"", "mensaje"=>"El usuario $varsesion inserto en el modulo Niveles", "fecha_hora"=>$fecha]);
-			$respuesta["status"] = 1;
-		}
-		echo json_encode($respuesta);
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Niveles", "fecha_hora"=>$fecha]);
+		$respuesta["status"] = 1;
+	} else if(!empty($nombre) && $status == "false"){
+		$db->insert("niveles",[
+			"nombre" => $nombre,
+			"status" => $statua
+		]);
+		$varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Niveles", "fecha_hora"=>$fecha]);
+		$respuesta["status"] = 1;
 	}
-
+	echo json_encode($respuesta);
+}
     function getNivel($id){
 		global $db;
         $nivel = $db->get("niveles", "*", ["id" => $id]);
@@ -62,19 +72,29 @@
 		$fecha= strftime("%y-%m-%d %H:%M:%S");
 		$nombre = $_POST['nombre'];
 		$status = $_POST['status'];
+		$statu = 1;
+		$statua = 0;
 
-		if (empty($nombre) && empty($status)) {
+		if (empty($nombre)) {
 			$respuesta["respuesta"] = 0;
-		}else{
+		}else if(!empty($nombre) && $status == "true"){
 			$db->update("niveles", [
 				"nombre" => $nombre,
-				"status" => $status
+				"status" => $statu
 			], [
 				"id" => $id
 			]);
 			$varsesion= $_SESSION['email'];
 
-				$db->insert("logs",["id_logs"=>"", "mensaje"=>"El usuario $varsesion actualizo en el modulo Niveles", "fecha_hora"=>$fecha]);
+				$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion actualizo en el modulo Niveles", "fecha_hora"=>$fecha]);
+			$respuesta["respuesta"] = 1;
+		} else if(!empty($nombre) && $status == "false"){
+			$db->update("niveles", [
+				"nombre" => $nombre,
+				"status" => $statua
+			], [
+				"id" => $id
+			]);
 			$respuesta["respuesta"] = 1;
 		}
 		echo json_encode($respuesta);

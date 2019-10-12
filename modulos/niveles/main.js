@@ -16,9 +16,15 @@ $(document).ready(function () {
             accion: "getNivel",
             nivel: id
         };
-        $.post("/modulos/niveles/consultas.php", obj, function (respuesta) {
+        $.post("/modulos/niveles/consultas.php",obj,function (respuesta) {
             $("#nombre").val(respuesta.nombre);
-            $("#status").val(respuesta.status);
+            
+            if(respuesta.status == "1"){
+                $("#status2").prop("checked",true);
+            } else if(respuesta.status == "0"){
+                $("#status1").prop("checked",true);
+            }
+            
             obj = {
                 accion: "updateNivel",
                 nivel: id
@@ -27,6 +33,7 @@ $(document).ready(function () {
         );
         $("#btn-form").text("Editar Nivel");
     });
+
 
     $(".btn-delete").click(function () {
         let id = $(this).attr("data");
@@ -59,9 +66,10 @@ $(document).ready(function () {
     $("#btn-form").click(function () {
         $("#nivel-form").find("input").map(function (i, e) {
             obj[$(this).prop("name")] = $(this).val();
-        });
-        $("#nivel-form").find("select").map(function (i, e) {
-            obj[$(this).prop("name")] = $(this).val();
+
+            if($(this).prop("type") == "radio"){
+                obj[$(this).prop("name")] = $(this).prop("checked");
+            }
         });
         switch (obj.accion) {
             case "insertNivel":
