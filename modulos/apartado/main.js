@@ -7,6 +7,7 @@ $(document).ready(function () {
         $("#apartado-form")[0].reset();
         $("#btn-form").text("Apartar cañon");
     });
+
     $(".btn-delete").click(function () {
         let id = $(this).attr("data");
         obj = {
@@ -70,6 +71,7 @@ $(document).ready(function () {
         );
         $("#btn-form").text("Editar apartado");
     });
+
     $("#btn-form").click(function () {
         $("#apartado-form")
             .find("input")
@@ -124,5 +126,8 @@ $(document).ready(function () {
             default:
                 break;
         }
+    });
+    $('#table_id').DataTable({
+        "lengthChange": false
     });
 });

@@ -3,6 +3,8 @@ require_once $_SERVER["DOCUMENT_ROOT"] . 'includes/database.php';
 session_start();
 error_reporting(0);
 $varsesion = $_SESSION['email'];
+
+print_r($_SESSION['id']);
 if (isset($varsesion)) {
     ?>
     <!DOCTYPE html>
@@ -14,6 +16,7 @@ if (isset($varsesion)) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="/css/estilo.css" />
         <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
         <script src="/vendor/components/jquery/jquery.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/js/alert.js"></script>
@@ -39,7 +42,7 @@ if (isset($varsesion)) {
                     </div>
                 </div>
                 <div class="info">
-                    <table class="table" id="main-table">
+                    <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Usuario</th>
@@ -129,20 +132,7 @@ if (isset($varsesion)) {
                         <form class="form-register" id="apartado-form">
                             <div class="row">
                                 <div class="col">
-                                    <select id="usuario" name="usuario" class="select_opt">
-                                        <option value="">Usuario</option>
-                                        <?php
-                                            $usuarios = $db->select("usuarios", "*");
-                                            if ($usuarios) {
-                                                foreach ($usuarios as $usuario) {
-                                                    echo "<option value='$usuario[id_usr]'>$usuario[nombre_usr]</option>";
-                                                }
-                                            } else {
-                                                echo "<script>errorAlert()</script>";
-                                            }
-
-                                            ?>
-                                    </select>
+                                    <input type="hidden" name="usuario" id="usuario" value="<?php print_r($_SESSION['id']); ?>">
                                     <input type="date" name="fecha_inicio" id="fecha_inicio">
                                     <input type="date" name="fecha_fin" id="fecha_fin">
                                     <input type="time" name="hora_inicio" id="hora_inicio">
@@ -211,6 +201,7 @@ if (isset($varsesion)) {
             <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
         </footer>
         <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
+        <script src="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
         <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
         <script src="/modulos/apartado/main.js"></script>
     </body>
