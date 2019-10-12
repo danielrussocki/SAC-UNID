@@ -3,6 +3,7 @@ require_once $_SERVER["DOCUMENT_ROOT"] . 'includes/database.php';
 session_start();
 error_reporting(0);
 $varsesion = $_SESSION['email'];
+$nivel = $_SESSION['nivel'];
 if (isset($varsesion)) {
     ?>
     <!DOCTYPE html>
@@ -32,12 +33,20 @@ if (isset($varsesion)) {
             <div class="contenedor-principal">
                 <div class="header">
                     <h3>Apartado</h3>
+                    <?php 
+                        if ($nivel == 1) {
+                            
+                        }else{
+                    ?>
                     <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
                         <a href="#"><i class="fas fa-calendar fa-lg" title="Apartar cañon"></i></a>
                     </div>
                     <div class="boton-cancelar" onClick="cancelAlert()">
                         <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
                     </div>
+                    <?php
+                        }
+                    ?>
                 </div>
                 <div class="info">
 

@@ -124,10 +124,8 @@
 										$error = 'Mail error: '.$mail->ErrorInfo; 
 										echo $error;
 									} else {
-										$error = 'Message sent!';
-										echo $error;
+										$respuesta["status"] = 1;
 									}
-                            	$respuesta["status"] = 1;
                     		} else {
                         		$respuesta["status"] = 0;
                     	}
