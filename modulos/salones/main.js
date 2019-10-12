@@ -1,32 +1,41 @@
 $(document).ready(function () {
   var obj = {};
 
-  $("#btn-new").click(function () {
-      obj = {
-          accion: "insertClass"
-      };
-      $("#user-form")[0].reset();
-      $("#btn-form").text("Registrar Nivel");
+  $("#btn-new").click(function() {
+    obj = {
+      accion: "insertClass"
+    };
+    $("#btn-new").hide();
+    $("#btn-form").text("Añadir Salon");
   });
 
-  $(".btn-edit").click(function () {
-      let id = $(this).attr("data");
-      obj = {
-          accion: "getClass",
-          salones: id
-      };
-      $.post("/modulos/salones/consultas.php", obj, function (respuesta) {
-          $("#nombre").val(respuesta.nombre);
-          $("#id_grados").val(respuesta.id_grados);
-          $("#tiene_canon").val(respuesta.tiene_canon);
-          $("#status").val(respuesta.status);
-          obj = {
-              accion: "updateClass",
-              salones: id
-          };
-      }, "JSON"
-      );
-      $("#btn-form").text("Editar Salon");
+  $("#btn-cancel").click(function(){
+    $("#btn-new").show();
+  });
+
+  $(".btn-edit").click(function() {
+    let id = $(this).attr("data");
+    obj = {
+      accion: "getClass",
+      salones: id
+    };
+    $.post(
+      "/modulos/salones/consultas.php",
+      obj,
+      function(respuesta) {
+        $("#nombre").val(respuesta.nombre);
+        $("#id_grados").val(respuesta.id_grados);
+        $("#tiene_canones").val(respuesta.tiene_canon);
+        $("#status").val(respuesta.status);
+        obj = {
+          accion: "updateClass",
+          salones: id,
+          nombre_original: respuesta.nombre
+        };
+      },
+      "JSON"
+    );
+    $("#btn-form").text("Editar Salon");
   });
 
   $(".btn-delete").click(function () {

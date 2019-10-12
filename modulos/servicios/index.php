@@ -36,7 +36,7 @@
                 <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
                     <a href="#"><i class="fas fa-clipboard-check" title="Añadir nuevo servicio"></i></a>
                 </div>
-                <div class="boton-cancelar" onClick="cancelAlert()">
+                <div class="boton-cancelar" id="btn-cancel" onClick="cancelAlert()">
                     <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
                 </div>
             </div>

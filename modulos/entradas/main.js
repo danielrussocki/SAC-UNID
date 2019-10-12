@@ -6,8 +6,12 @@ $(document).ready(function () {
         obj = {
             accion: "insertEntrada"
         };
+        $("#btn-new").hide();
         $("#entrada-form")[0].reset();
         $("#btn-form").text("Registrar entrada");
+    });
+    $("#btn-cancel").click(function(){
+        $("#btn-new").show();
     });
 
     $(".btn-edit").click(function () {

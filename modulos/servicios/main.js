@@ -7,9 +7,14 @@ $(document).ready(function () {
         obj = {
             accion: "insertServicio"
         };
+        $("#btn-new").hide();
         $("#servicio-form")[0].reset();
         $("#btn-form").text("Registrar servicio");
     });
+
+    $("#btn-cancel").click(function(){
+        $("#btn-new").show();
+      });
 
     $(".btn-edit").click(function () {
         let id = $(this).attr("data");
