@@ -104,5 +104,7 @@ $(document).ready(function () {
               break;
       }
   });
-
+  $('#table_grados').DataTable({
+    "lengthChange": false
+  });
 });

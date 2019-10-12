@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/estilo.css" />
     <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+    <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css"/>
     <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
@@ -25,34 +26,34 @@
         Include_once $_SERVER["DOCUMENT_ROOT"].'modulos/shared/navbar.php';
     ?>
     <section class="wrapper">
-      <?php
-         Include_once $_SERVER["DOCUMENT_ROOT"].'modulos/shared/sidebar.php';
-      ?>
-      <div class="contenedor-principal">
-        <div class="header">
-          <h3>Salones</h3>
-          <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
-            <a href="#"><i class="fas fa-eye fa-lg" title="Añadir nuevo Salon"></i></a>
-          </div>
-          <div class="boton-cancelar" id="btn-cancel" onClick="cancelAlert()">
-            <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
-          </div>
-        </div>
-        <div class="info">
-        <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Salon</th>
-                <th>Grado</th>
-                <th>Tiene_Cañon</th>
-                <th>Status</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-                        $salones = $db->select("salones","*");
+        <?php
+            Include_once $_SERVER["DOCUMENT_ROOT"].'modulos/shared/sidebar.php';
+        ?>
+        <div class="contenedor-principal">
+            <div class="header">
+                <h3>Salones</h3>
+                <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
+                    <a href="#"><i class="fas fa-eye fa-lg" title="Añadir nuevo Salon"></i></a>
+                </div>
+                <div class="boton-cancelar"  id="btn-cancel" onClick="cancelAlert()">
+                    <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
+                </div>
+            </div>
+            <div class="info">
+            <table id="table_salones" class="table table-striped table-bordered" style="width:100%; height:80%">
+                    <thead class="thead-dark">
+                        <tr>
+                          <th>No.</th>
+                          <th>Salon</th>
+                          <th>Grado</th>
+                          <th>Tiene_Cañon</th>
+                          <th>Status</th>
+                          <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                         $salones = $db->select("salones","*");
                         if($salones)
                         {
                             foreach ($salones as $sal => $salon)
@@ -102,11 +103,10 @@
                         <select id="id_grados" name="id_grados" class="select_opt">
 			                    	<option value="">Selecciona un Grado</option>
                               <?php 
-                                $grados = $db->select("grados","*");
-                                $RO= count($grados);
-                              for ($i=0; $i <$RO ; $i++) { 
+                                 $grados = $db->select("grados", ["id_grados", "nombre"], ["status" => "1"]);
+                              foreach ($grados as $grado) { 
                                 ?>
-                                <option value="<?php echo $grados[$i]['id_grados'];?>"> <?php echo $grados[$i]['nombre'];?></option>
+                                <option value="<?php echo $grado['id_grados'];?>"> <?php echo $grado['nombre'];?></option>
 					                  	<?php
 				                      	}	?>
 			                  </select>           
@@ -134,6 +134,7 @@
     </footer>
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
     <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
+    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/modulos/salones/main.js"></script>
 </body>
 
