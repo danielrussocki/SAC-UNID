@@ -105,11 +105,12 @@
 								$email_from = "sistemacanones@smoothoperators.com.mx";
 								$from_name = "Sistema Cañones";
 								$subject = "Activación de cuenta Sistema Cañones";
-								$body = "Bienvenido a nuestro sistema, por favor da click al siguiente link para activar tu cuenta: <a href=.$activeLink.>.$activeLink.</strong></a>";
+								$body = "Bienvenido a nuestro sistema, por favor da click al siguiente link para activar tu cuenta: <br><br><a href=$activeLink>$activeLink</a>";
 								global $error;
 								$mail = new PHPMailer();  // create a new object
+								$mail->CharSet = "utf-8";
 								$mail->IsSMTP(); // enable SMTP
-								$mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
+								$mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
 								$mail->SMTPAuth = true;  // authentication enabled
 								$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
 								$mail->Host = 'smtp.gmail.com';
@@ -119,12 +120,13 @@
 								$mail->SetFrom($email_from, $from_name);
 								$mail->Subject = $subject;
 								$mail->Body = $body;
+								$mail->IsHTML(true);
 								$mail->AddAddress($email_to);
 									if(!$mail->Send()) {
 										$error = 'Mail error: '.$mail->ErrorInfo; 
 										echo $error;
 									} else {
-										$respuesta["status"] = 1;
+										echo $error;
 									}
                     		} else {
                         		$respuesta["status"] = 0;
