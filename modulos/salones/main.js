@@ -125,4 +125,7 @@ $(document).ready(function() {
         break;
     }
   });
+  $('#table_id').DataTable({
+    "lengthChange": false
+  });
 });

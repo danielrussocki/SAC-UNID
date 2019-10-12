@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  $('#table_id').DataTable();
   let obj = {};
   $("#btn-new").click(function() {
     obj = {
@@ -122,4 +121,7 @@ $(document).ready(function(){
         break;
     }
   });
-});
+  $('#table_id').DataTable({
+    "lengthChange": false
+  });
+});ss

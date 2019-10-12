@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/estilo.css" />
     <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+    <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
     <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
@@ -37,15 +38,15 @@
           </div>
         </div>
         <div class="info">
-          <table class="table">
-            <thead class="thead-dark">
+        <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+            <thead>
               <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Salon</th>
-                <th scope="col">Grado</th>
-                <th scope="col">Tiene_Cañon</th>
-                <th scope="col">Status</th>
-                <th scope="col">Acciones</th>
+                <th>ID</th>
+                <th>Salon</th>
+                <th>Grado</th>
+                <th>Tiene_Cañon</th>
+                <th>Status</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -93,6 +94,7 @@
       <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
     </footer>
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
     <script src="/modulos/salones/main.js"></script>
   </body>

@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/estilo.css" />
     <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+    <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
     <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
@@ -33,12 +34,12 @@
         </div>
         <div class="info">
           <!-- TABLA -->
-          <table class="table">
-            <thead class="thead-dark">
+          <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+            <thead>
               <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Mensaje</th>
-                <th scope="col">Fecha y hora</th>
+                <th>#</th>
+                <th>Mensaje</th>
+                <th>Fecha y hora</th>
               </tr>
             </thead>
             <tbody>
@@ -70,6 +71,7 @@
       <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
     </footer>
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
     <script src="/modulos/grados/main.js"></script>
   </body>

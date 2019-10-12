@@ -13,7 +13,8 @@ if (isset($varsesion)) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="/css/estilo.css" />
-        <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />     
+        <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />       
         <script src="/vendor/components/jquery/jquery.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/js/alert.js"></script>
@@ -39,21 +40,23 @@ if (isset($varsesion)) {
                     </div>
                 </div>
                 <div class="info">
-                    <table class="table" id="main-table">
-                        <thead class="thead-dark">
+
+<table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+            <thead>
                             <tr>
-                                <th scope="col">Usuario</th>
-                                <th scope="col">Fecha Inicio</th>
-                                <th scope="col">Fecha Final</th>
-                                <th scope="col">Hora Inicio</th>
-                                <th scope="col">Hora Final</th>
-                                <th scope="col">servicios</th>
-                                <th scope="col">cañon</th>
-                                <th scope="col">salon</th>
-                                <th scope="col">comentarios</th>
-                                <th scope="col">accesorios</th>
-                                <th scope="col">status</th>
-                                <th scope="col">Acciones</th>
+                            
+                                <th >Usuario</th>
+                                <th >Fecha Inicio</th>
+                                <th >Fecha Final</th>
+                                <th>Hora Inicio</th>
+                                <th>Hora Final</th>
+                                <th>servicios</th>
+                                <th>cañon</th>
+                                <th>salon</th>
+                                <th>comentarios</th>
+                                <th>accesorios</th>
+                                <th>status</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -211,6 +214,7 @@ if (isset($varsesion)) {
             <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
         </footer>
         <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
+        <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
         <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
         <script src="/modulos/apartado/main.js"></script>
     </body>

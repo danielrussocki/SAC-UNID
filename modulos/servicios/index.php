@@ -14,11 +14,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/css/estilo.css" />
     <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
-    <link rel ="stlylesshet" hreff="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css"/>
+    <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css"/>
     <script src="/vendor/components/jquery/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/js/alert.js"></script>
-    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
 
     <title>Entradas</title>
 </head>
@@ -42,13 +41,13 @@
                 </div>
             </div>
             <div class="info">
-            <table id="table_id" class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Servicio</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Acciones</th>
+            <table id="table_servicios" class="table table-striped table-bordered" style="width:100%; height:80%">
+            <thead>
+              <tr>
+                <th>#</th>
+                            <th>Servicio</th>
+                            <th>Status</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,6 +121,7 @@
         <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
     </footer>
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
+    <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
     <script src="/modulos/servicios/main.js"></script>
 </body>

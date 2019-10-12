@@ -1,5 +1,7 @@
 <?php
 	require_once $_SERVER["DOCUMENT_ROOT"].'includes/database.php';
+	use PHPMailer\PHPMailer\PHPMailer;
+	require $_SERVER["DOCUMENT_ROOT"] . 'vendor/autoload.php';
 	session_start();
 	error_reporting(0);
 	$varsesion = $_SESSION['email'];
@@ -40,6 +42,9 @@
 					$_SESSION['status'] = $usuario["status_usr"];
 					$_SESSION['nivel'] = $usuario["nivel_usr"];
 					$respuesta["status"] = 3;
+					$varsesion= $_SESSION['email'];
+
+				    $db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion A iniciado sesion", "fecha_hora"=>$fecha]);
 
 				}else{
 					$respuesta["status"] = 2;
@@ -87,18 +92,41 @@
 						]);
 						
 						$varsesion= $_SESSION['email'];
-
-				$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Login", "fecha_hora"=>$fecha]);
+						$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Login", "fecha_hora"=>$fecha]);
 						 
                     		if ($usuarios) {
-								//Envio de correo
-								$to = $_POST["email"];
-								$subject = 'Activación de correo';
-								$msg = '<h1>Hola, bienvenido a nuestro sistema de apartado de cañones.</h1> <p>Link de activación: ...</p>';
-								$headers = "From: Sistema Cañones <sistemacanones@smoothoperators.com.mx>\r\n";
-								$headers = "Reply To: replyto@smoothoperators.com.mx\r\n";
-								$headers .= "Content-type text/html\r\n";
-								mail($to, $subject, $msg, $headers);
+								$email = $db->get("usuarios", "*", [
+									"matricula_usr" => $_POST["matricula"]
+								]);
+								$email_to = $email["email_usr"];
+								$id_usr = $email["id_usr"];
+								$path = "http://smoothoperators.com.mx/modulos/login/";
+								$activeLink = $path."activar_usr.php?id=".$id_usr;
+								$email_from = "sistemacanones@smoothoperators.com.mx";
+								$from_name = "Sistema Cañones";
+								$subject = "Activación de cuenta Sistema Cañones";
+								$body = "Bienvenido a nuestro sistema, por favor da click al siguiente link para activar tu cuenta: <a href=.$activeLink.>.$activeLink.</strong></a>";
+								global $error;
+								$mail = new PHPMailer();  // create a new object
+								$mail->IsSMTP(); // enable SMTP
+								$mail->SMTPDebug = 2;  // debugging: 1 = errors and messages, 2 = messages only
+								$mail->SMTPAuth = true;  // authentication enabled
+								$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+								$mail->Host = 'smtp.gmail.com';
+								$mail->Port = 465; 
+								$mail->Username = 'sistemacanones@smoothoperators.com.mx';  
+								$mail->Password = '&7yQ=b&<';
+								$mail->SetFrom($email_from, $from_name);
+								$mail->Subject = $subject;
+								$mail->Body = $body;
+								$mail->AddAddress($email_to);
+									if(!$mail->Send()) {
+										$error = 'Mail error: '.$mail->ErrorInfo; 
+										echo $error;
+									} else {
+										$error = 'Message sent!';
+										echo $error;
+									}
                             	$respuesta["status"] = 1;
                     		} else {
                         		$respuesta["status"] = 0;

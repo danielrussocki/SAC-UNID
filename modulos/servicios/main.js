@@ -119,4 +119,7 @@ $(document).ready(function () {
                 break;
         }
     });
+    $('#table_servicios').DataTable({
+        "lengthChange": false
+      });
 });

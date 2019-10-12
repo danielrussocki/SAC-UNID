@@ -39,6 +39,7 @@ function insertApartado()
 	$comentario = $_POST['comentario'];
 	$accesorio = $_POST['accesorio'];
 	$status = 0;
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 
 	if (empty($usuario) && empty($fecha_inicio) && ($fecha_fin) && ($hora_inicio) && ($hora_fin) && ($servicio) && ($canon) && ($salon)) {
 		$respuesta["status"] = 0;
@@ -56,6 +57,9 @@ function insertApartado()
 			"accesorios" => $accesorio,
 			"status" => $status
 		]);
+		$varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion inserto en el modulo Apartado", "fecha_hora"=>$fecha]);
 		$respuesta["status"] = 1;
 
 		global $db;
@@ -124,6 +128,7 @@ function updateServicio($id)
 	$comentario = $_POST['comentarios'];
 	$accesorio = $_POST['accesorios'];
 	$status = $_POST['status'];
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	if (empty($usuario) && empty($fecha_inicio) && ($fecha_fin) && ($hora_inicio) && ($hora_fin) && ($servicio) && ($canon) && ($salon)) {
 		$respuesta["status"] = 0;
 	} else if (!empty($usuario) && $status == "true") {
@@ -142,6 +147,9 @@ function updateServicio($id)
 		], [
 			"id" => $id
 		]);
+		$varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Apartado", "fecha_hora"=>$fecha]);
 		$respuesta["respuesta"] = 1;
 		var_dump($db->error());
 		var_dump($db->log());
@@ -154,7 +162,11 @@ function updateServicio($id)
 function deleteApartado($id)
 {
 	global $db;
+	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	$db->delete("reservas", ["id_apartado" => $id]);
+	$varsesion= $_SESSION['email'];
+
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Elimino en el modulo Apartado", "fecha_hora"=>$fecha]);
 	$respuesta["status"] = 1;
 	echo json_encode($respuesta);
 }
