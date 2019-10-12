@@ -112,7 +112,7 @@ $(document).ready(function () {
                     function (respuesta) {
                         if (respuesta.status == 0) {
                             swal("¡ERROR!", "Campos vacios", "error");
-                        } else if (respuesta.status == 1) {
+                        } if (respuesta.status == 1) {
                             swal("Éxito", "Cañón editado  correctamente", "success").then(() => {
                                 cancelAlert();
                                 location.reload();
@@ -129,7 +129,7 @@ $(document).ready(function () {
                 break;
         }
     });
-    $('#table_id').DataTable({
+    $('#table_apartado').DataTable({
         "lengthChange": false
     });   
 });

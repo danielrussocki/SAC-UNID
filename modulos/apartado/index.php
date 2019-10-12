@@ -49,12 +49,12 @@ if (isset($varsesion)) {
                     ?>
                 </div>
                 <div class="info">
-                    <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+                    <table id="table_apartado" class="table table-striped table-bordered" style="width:100%; height:80%">
                         <thead class="thead-dark">
                             <tr>
-                                <th >Usuario</th>
-                                <th >Fecha Inicio</th>
-                                <th >Fecha Final</th>
+                                <th>Usuario</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Final</th>
                                 <th>Hora Inicio</th>
                                 <th>Hora Final</th>
                                 <th>servicios</th>
