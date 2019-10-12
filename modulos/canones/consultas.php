@@ -61,13 +61,23 @@ function insertar_canon(){
 		if($first_val){
 			$respuesta["status"] = 2;
 		} else {
+			if($control == 'false' || $control == false){
+				$control = 0;
+			} else if($control == 'true' || $control == true){
+				$control = 1;
+			}
+			if($status == 'false' || $status == false){
+				$status = 0;
+			} else if($status == 'true' || $status == true){
+				$status = 1;
+			}
 			$canon_e = $db->insert(
 				"canones",
 				[
 					"id_can"=>"",
 					"nombre_can"=>$nombre,
 					"status_can"=>$status,
-					"entrada_can"=>$entrada,
+					"id_entrada"=>$entrada,
 					"control_can"=>$control,
 					"serie_can"=>$serie
 				]);
@@ -115,10 +125,20 @@ function update_canon(){
 		if($first_val){
 			$respuesta["status"] = 2;
 		} else {
+			if($control == 'false' || $control == false){
+				$control = 0;
+			} else if($control == 'true' || $control == true){
+				$control = 1;
+			}
+			if($status == 'false' || $status == false){
+				$status = 0;
+			} else if($status == 'true' || $status == true){
+				$status = 1;
+			}
 			$canon_e = $db->update("canones", [
 				"nombre_can"=>$nombre,
 				"status_can"=>$status,
-				"entrada_can"=>$entrada,
+				"id_entrada"=>$entrada,
 				"control_can"=>$control,
 				"serie_can"=>$serie
 			], ["id_can" => $id]);
@@ -130,7 +150,6 @@ function update_canon(){
 		}
 	} else {
 		$respuesta["status"] = 3;
-		
 	}
 	echo json_encode($respuesta);
 }

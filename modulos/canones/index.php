@@ -38,17 +38,16 @@
           </div>
         </div>
         <div class="info">
-        <!-- TABLA -->
-        <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
+          <table id="table_lel" class="table table-striped table-bordered" style="width:100%; height:80%">
             <thead>
               <tr>
                 <th>#</th>
-                <th >Nombre</th>
-                <th >Status</th>
-                <th >Entrada</th>
-                <th >Control</th>
-                <th >Num. Serie</th>
-                <th >Acciones</th>
+                <th>Nombre</th>
+                <th>Status</th>
+                <th>Entrada</th>
+                <th>Control</th>
+                <th>Num. Serie</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -70,7 +69,7 @@
                         echo "Inactivo";
                     }
                 ?></td> 
-                <td><?php echo $canon['entrada_can']; ?></td>
+                <td><?php echo $canon['id_entrada']; ?></td>
                 <td><?php echo $canon['control_can']; ?></td>
                 <td><?php echo $canon['serie_can']; ?></td>
                 <td>
@@ -88,12 +87,68 @@
             </tbody>
           </table>
           <!-- FORMULARIO -->
+          <style>
+              #control, #sts{
+                margin-bottom: 12px;
+              }
+              #control span, #sts span{
+                font-size:14px;
+              }
+              #control input, #sts input{
+                width: auto;
+                margin:0 6px;
+                cursor: pointer;
+              }
+              .radio-container{
+                display: flex;
+                justify-content:flex-start;
+                align-items:center;
+              }
+              .radio-container span{
+                margin-left: 6px;
+              }
+              </style>
           <div class="form">
             <form class="form-register" id="canon-form">
               <input type="text" name="nombre" id="nombre" placeholder="Nombre" />
-              <input type="text" name="status" id="status" placeholder="Status" />
-              <input type="text" name="entrada" id="entrada" placeholder="Entrada" />
-              <input type="text" name="control" id="control" placeholder="Control" />
+              <!-- <input type="text" name="status" id="status" placeholder="Status" /> -->
+              <div id="sts">
+                <div class="radio-container">
+                  <input type="radio" name="status" id="stsOne" value="1" checked="checked">
+                  <span>Activo</span>
+                </div>
+                <div class="radio-container">
+                  <input type="radio" name="status" id="stsTwo" value="0">
+                  <span>Inactivo</span>
+                </div>
+              </div>
+              <!-- <input type="text" name="entrada" id="entrada" placeholder="Entrada" /> -->
+              <select name="entrada" id="entrada" class="select_opt">
+                        <option value="">Seleccione una entrada</option>
+                        <?php
+                          $ents = $db->select('entradas', '*', ['status'=>1]);
+                          if($ents){
+                            foreach($ents as $eeee){
+                              ?>
+                              <option value="<?php echo $eeee['id']; ?>"><?php echo $eeee['nombre']; ?></option>
+                              <?php
+                            }
+                          } else {
+                            echo "<script>errorAlert()</script>";
+                          }
+                        ?>
+              </select>
+              <!-- <input type="text" name="control" id="control" placeholder="Control" /> -->
+              <div id="control">
+                <div class="radio-container">
+                  <input type="radio" name="control" id="controlOne" value="1" checked="checked">
+                  <span>Tiene control</span>
+                </div>
+                <div class="radio-container">
+                  <input type="radio" name="control" id="controlTwo" value="0">
+                  <span>No tiene control</span>
+                </div>
+              </div>
               <input type="text" name="serie" id="serie" placeholder="N. serie" />
               <button type="button" id="btn-form">Registrar cañon <i class="fas fa-eye fa-sm"></i></button>
             </form>
