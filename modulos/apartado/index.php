@@ -63,7 +63,15 @@ if (isset($varsesion)) {
                                 <th>comentarios</th>
                                 <th>accesorios</th>
                                 <th>status</th>
+                                <?php 
+                                    if ($nivel == 1) {
+                
+                                    }else {
+                                ?>
                                 <th>Acciones</th>
+                                <?php
+                                    }
+                                ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,10 +129,18 @@ if (isset($varsesion)) {
                                         <td><?php echo utf8_encode($reserva['comentarios']); ?></td>
                                         <td><?php echo utf8_encode($reserva['accesorios']); ?></td>
                                         <td><?php echo $reserva['status']; ?></td>
+                                        <?php 
+                                        if ($nivel == 1) {
+
+                                        }else {
+                                        ?>
                                         <td>
                                             <a href="#" data="<?php echo $reserva['id_apartado'] ?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
                                             <a href="#" data="<?php echo $reserva['id_apartado'] ?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
                                         </td>
+                                        <?php
+                                        }
+                                        ?>
                                 <?php
                                         }
                                     } else {
