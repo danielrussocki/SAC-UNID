@@ -14,7 +14,7 @@
 			case 'register':
 				register();
 				break;
-				
+
 			default:
 				break;
 		}
@@ -123,10 +123,11 @@
 								$mail->IsHTML(true);
 								$mail->AddAddress($email_to);
 									if(!$mail->Send()) {
-										$error = 'Mail error: '.$mail->ErrorInfo; 
-										echo $error;
+										//$error = 'Mail error: '.$mail->ErrorInfo; 
+										//echo $error;
+										$respuesta["status"] = 4;
 									} else {
-										echo $error;
+										$respuesta["status"] = 1;
 									}
                     		} else {
                         		$respuesta["status"] = 0;
