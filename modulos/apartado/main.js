@@ -131,5 +131,32 @@ $(document).ready(function () {
     });
     $('#table_apartado').DataTable({
         "lengthChange": false
-    });   
+    });  
+    
+    $("#btn-interno").click(function(){
+        let obj = {
+        };
+        $("#apartado-form").find("input, select").map(function(i,e){
+            obj[$(this).prop("name")] = $(this).val();
+            if($(this).prop("type") == "select-one"){
+                obj[$(this).prop("name")+"_texto"] = $(this).find("option:selected").text();
+            }  
+        });
+        let template = `
+            <tr>
+                <td>${obj.usuario_texto}</td>
+                <td>${obj.dia_inicio}</td>
+                <td>${obj.hora_inicio}</td>
+                <td>Cañon</td>
+                <td>Editar Eliminar</td>
+            </tr>
+        `;
+        $("#tabla_interna tbody").append(template);
+        reset_content(".formulario_registro");
+    });
+    function reset_content(selector){
+        $(selector + " input, " + selector + " select").each(function(){
+            $(this).val("");
+        })
+    }
 });
