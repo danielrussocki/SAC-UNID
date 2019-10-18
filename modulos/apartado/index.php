@@ -153,7 +153,38 @@ if (isset($varsesion)) {
                     <!-- FORMULARIO -->
                     <div class="form">
                         <form class="form-register" id="apartado-form">
-                            <div class="row">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-sm-6 formulario_registro">
+                                            <label for="usuario">Usuario</label>
+                                            <select name="usuario" id="usuario">
+                                                <option value="">Selecciona un usuario...</option>
+                                                <option value="1">Abraham Pech</option>
+                                            </select>
+                                                <label for="dia_inicio">Día de Reservación</label>
+                                                <input type="text" name="dia_inicio" id="dia_inicio">
+                                                <label for="hora_inicio">hora</label>
+                                                <input type="text" name="hora_inicio" id="hora_inicio">
+                                                <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
+                                                <button type="button" class="btn-cancelar">Cancelar</button>
+                                            </div>
+                                            <div class="col-sm-6 table-responsive">
+                                                <table class="table table-striped" id="tabla_interna">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Usuario</th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora</th>
+                                                        <th>Cañon</th>
+                                                        <th>Acciones</th>                                                       
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>      
+                                        </div> 
+                                    </div>
+                            <!-- <div class="row">
                                 <div class="col">
                                     <select id="usuario" name="usuario" class="select_opt">
                                         <option value="">Usuario</option>
@@ -225,7 +256,7 @@ if (isset($varsesion)) {
                                     <option value="0">Inactivo</option>
                                 </select>
                                 <button type="button" id="btn-form">Apartar cañon <i class="fas fa-level-up-alt fa-sm"></i></button>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                     <!-- FIN FORMULARIO -->
