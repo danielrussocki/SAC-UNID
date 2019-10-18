@@ -8,7 +8,7 @@ $(document).ready(function () {
         $("#btn-form").text("Apartar cañon");
         $("#btn-new").hide();
     });
-    $("#btn-cancel").click(function(){
+    $("#btn-cancel").click(function () {
         $("#btn-new").show();
     });
     $(".btn-delete").click(function () {
@@ -112,7 +112,8 @@ $(document).ready(function () {
                     function (respuesta) {
                         if (respuesta.status == 0) {
                             swal("¡ERROR!", "Campos vacios", "error");
-                        } if (respuesta.status == 1) {
+                        }
+                        if (respuesta.status == 1) {
                             swal("Éxito", "Cañón editado  correctamente", "success").then(() => {
                                 cancelAlert();
                                 location.reload();
@@ -131,31 +132,35 @@ $(document).ready(function () {
     });
     $('#table_apartado').DataTable({
         "lengthChange": false
-    });  
-    
-    $("#btn-interno").click(function(){
-        let obj = {
-        };
-        $("#apartado-form").find("input, select").map(function(i,e){
+    });
+
+    $("#btn-interno").click(function () {
+        let obj = {};
+        $("#apartado-form").find("input, select").map(function (i, e) {
             obj[$(this).prop("name")] = $(this).val();
-            if($(this).prop("type") == "select-one"){
-                obj[$(this).prop("name")+"_texto"] = $(this).find("option:selected").text();
-            }  
+            if ($(this).prop("type") == "select-one") {
+                obj[$(this).prop("name") + "_texto"] = $(this).find("option:selected").text();
+            }
         });
         let template = `
             <tr>
                 <td>${obj.usuario_texto}</td>
                 <td>${obj.dia_inicio}</td>
                 <td>${obj.hora_inicio}</td>
-                <td>Cañon</td>
+                <td>${obj.servicio_texto}</td>
+                <td>${obj.salon_texto}</td>
+                <td>${obj.canon_texto}</td>
+                <td>${obj.comentarios}</td>
+                <td>${obj.accesorios}</td>
                 <td>Editar Eliminar</td>
             </tr>
         `;
         $("#tabla_interna tbody").append(template);
         reset_content(".formulario_registro");
     });
-    function reset_content(selector){
-        $(selector + " input, " + selector + " select").each(function(){
+
+    function reset_content(selector) {
+        $(selector + " input, " + selector + " select").each(function () {
             $(this).val("");
         })
     }

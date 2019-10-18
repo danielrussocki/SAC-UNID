@@ -14,8 +14,8 @@ if (isset($varsesion)) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="/css/estilo.css" />
-        <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />     
-        <link rel ="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />       
+        <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
         <script src="/vendor/components/jquery/jquery.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/js/alert.js"></script>
@@ -33,20 +33,18 @@ if (isset($varsesion)) {
             <div class="contenedor-principal">
                 <div class="header">
                     <h3>Apartado</h3>
-                    <?php 
-                        if ($nivel == 1) {
-                            
-                        }else{
-                    ?>
-                    <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
-                        <a href="#"><i class="fas fa-calendar fa-lg" title="Apartar cañon"></i></a>
-                    </div>
-                    <div class="boton-cancelar" id="btn-cancel" onClick="cancelAlert()">
-                        <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
-                    </div>
+                    <?php
+                        if ($nivel == 1) { } else {
+                            ?>
+                        <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
+                            <a href="#"><i class="fas fa-calendar fa-lg" title="Apartar cañon"></i></a>
+                        </div>
+                        <div class="boton-cancelar" id="btn-cancel" onClick="cancelAlert()">
+                            <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
+                        </div>
                     <?php
                         }
-                    ?>
+                        ?>
                 </div>
                 <div class="info">
                     <table id="table_apartado" class="table table-striped table-bordered" style="width:100%; height:80%">
@@ -63,15 +61,13 @@ if (isset($varsesion)) {
                                 <th>comentarios</th>
                                 <th>accesorios</th>
                                 <th>status</th>
-                                <?php 
-                                    if ($nivel == 1) {
-                
-                                    }else {
-                                ?>
-                                <th>Acciones</th>
+                                <?php
+                                    if ($nivel == 1) { } else {
+                                        ?>
+                                    <th>Acciones</th>
                                 <?php
                                     }
-                                ?>
+                                    ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,18 +125,16 @@ if (isset($varsesion)) {
                                         <td><?php echo utf8_encode($reserva['comentarios']); ?></td>
                                         <td><?php echo utf8_encode($reserva['accesorios']); ?></td>
                                         <td><?php echo $reserva['status']; ?></td>
-                                        <?php 
-                                        if ($nivel == 1) {
-
-                                        }else {
-                                        ?>
-                                        <td>
-                                            <a href="#" data="<?php echo $reserva['id_apartado'] ?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
-                                            <a href="#" data="<?php echo $reserva['id_apartado'] ?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
-                                        </td>
                                         <?php
-                                        }
-                                        ?>
+                                                    if ($nivel == 1) { } else {
+                                                        ?>
+                                            <td>
+                                                <a href="#" data="<?php echo $reserva['id_apartado'] ?>" class="btn-edit"><i class="fas fa-edit" title="Editar" onClick="newAlert()"></i></a>
+                                                <a href="#" data="<?php echo $reserva['id_apartado'] ?>" class="btn-delete"><i class="fas fa-trash-alt" title="Eliminar"></i></a>
+                                            </td>
+                                        <?php
+                                                    }
+                                                    ?>
                                 <?php
                                         }
                                     } else {
@@ -153,37 +147,65 @@ if (isset($varsesion)) {
                     <!-- FORMULARIO -->
                     <div class="form">
                         <form class="form-register" id="apartado-form">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-sm-6 formulario_registro">
-                                            <label for="usuario">Usuario</label>
-                                            <select name="usuario" id="usuario">
-                                                <option value="">Selecciona un usuario...</option>
-                                                <option value="1">Abraham Pech</option>
-                                            </select>
-                                                <label for="dia_inicio">Día de Reservación</label>
-                                                <input type="text" name="dia_inicio" id="dia_inicio">
-                                                <label for="hora_inicio">hora</label>
-                                                <input type="text" name="hora_inicio" id="hora_inicio">
-                                                <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
-                                                <button type="button" class="btn-cancelar">Cancelar</button>
-                                            </div>
-                                            <div class="col-sm-6 table-responsive">
-                                                <table class="table table-striped" id="tabla_interna">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Usuario</th>
-                                                        <th>Fecha</th>
-                                                        <th>Hora</th>
-                                                        <th>Cañon</th>
-                                                        <th>Acciones</th>                                                       
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-                                                </table>
-                                            </div>      
-                                        </div> 
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-4 formulario_registro">
+                                        <label for="usuario">Usuario</label>
+                                        <select name="usuario" id="usuario" class="select_opt">
+                                            <option value="">Selecciona un usuario...</option>
+                                            <option value="1">Abraham Pech</option>
+                                        </select>
+                                        <label for="dia_inicio">Día de Reservación</label>
+                                        <input type="date" name="dia_inicio" id="dia_inicio">
+                                        <label for="hora_inicio">hora</label>
+                                        <input type="time" name="hora_inicio" id="hora_inicio">
+
+                                        <label for="servicio">Servicio</label>
+                                        <select name="servicio" id="servicio" class="select_opt">
+                                            <option value="">Selecciona un servicio...</option>
+                                            <option value="1">servicio</option>
+                                        </select>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <label for="Salon">Salon</label>
+                                        <select name="salon" id="salon" class="select_opt">
+                                            <option value="">Selecciona un salon...</option>
+                                            <option value="1">salon</option>
+                                        </select>
+                                        <label for="canon">Cañon</label>
+                                        <select name="canon" id="canon" class="select_opt">
+                                            <option value="">Selecciona un cañon...</option>
+                                            <option value="1">Cañon</option>
+                                        </select>
+                                        <label for="comentarios">comentarios</label>
+                                        <input type="text" name="comentarios" id="comentarios">
+                                        <label for="accesorios">Accesorios</label>
+                                        <input type="text" name="accesorios" id="accesorios">
+
+                                    </div>
+
+                                    <div class="col-sm-4 table-responsive">
+                                        <table class="table table-striped" id="tabla_interna">
+                                            <thead>
+                                                <tr>
+                                                    <th>Usuario</th>
+                                                    <th>Fecha</th>
+                                                    <th>Hora</th>
+                                                    <th>Servicio</th>
+                                                    <th>Salon</th>
+                                                    <th>Cañon</th>
+                                                    <th>Comentarios</th>
+                                                    <th>Accesorios</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
+                                    <button type="button" class="btn-cancelar">Cancelar</button>
+                                </div>
+                            </div>
                             <!-- <div class="row">
                                 <div class="col">
                                     <select id="usuario" name="usuario" class="select_opt">
@@ -267,7 +289,7 @@ if (isset($varsesion)) {
             <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
         </footer>
         <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
-        <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
         <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
         <script src="/modulos/apartado/main.js"></script>
     </body>
