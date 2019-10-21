@@ -61,10 +61,10 @@ function insertApartado()
 			$mail->SMTPAuth = true; 
 			$mail->Host = 'smtp.gmail.com';
 			$mail->Port = 465; 
-			$mail->Username = 'sistemacanones@smoothoperators.com.mx';  
-			$mail->Password = '&7yQ=b&<';
+			$mail->Username = 'mail.smoothoperators@gmail.com';  
+			$mail->Password = 'Goodluck13';
 			$mail->SMTPSecure = 'ssl';
-			$email_from = "sistemacanones@smoothoperators.com.mx";
+			$email_from = "mail@smoothoperators.com.mx";
 			$from_name = "Sistema Cañones";
 			$mail->SetFrom($email_from, $from_name);
 			$mail->Subject = 'Sistema apartado cañones';

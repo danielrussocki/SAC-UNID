@@ -102,7 +102,7 @@
 								$id_usr = $email["id_usr"];
 								$path = "http://smoothoperators.com.mx/modulos/login/";
 								$activeLink = $path."activar_usr.php?id=".$id_usr;
-								$email_from = "sistemacanones@smoothoperators.com.mx";
+								$email_from = "mail@smoothoperators.com.mx";
 								$from_name = "Sistema Cañones";
 								$subject = "Activación de cuenta Sistema Cañones";
 								$body = "Bienvenido a nuestro sistema, por favor da click al siguiente link para activar tu cuenta: <br><br><a href=$activeLink>$activeLink</a>";
@@ -115,8 +115,8 @@
 								$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
 								$mail->Host = 'smtp.gmail.com';
 								$mail->Port = 465; 
-								$mail->Username = 'sistemacanones@smoothoperators.com.mx';  
-								$mail->Password = '&7yQ=b&<';
+								$mail->Username = 'mail.smoothoperators@gmail.com';  
+								$mail->Password = 'Goodluck13';
 								$mail->SetFrom($email_from, $from_name);
 								$mail->Subject = $subject;
 								$mail->Body = $body;
