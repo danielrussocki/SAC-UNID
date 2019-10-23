@@ -16,7 +16,9 @@ if (isset($varsesion)) {
         <link rel="stylesheet" href="/css/estilo.css" />
         <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" href="/vendor/harvesthq/chosen/chosen.css" />
         <script src="/vendor/components/jquery/jquery.min.js"></script>
+        <script src="/vendor/harvesthq/chosen/chosen.jquery.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/js/alert.js"></script>
         <title>Apartado</title>
@@ -107,8 +109,6 @@ if (isset($varsesion)) {
                                     "salones.id_salones",
                                     "salones.nombre(nombre_salon)"
                                 ]);
-                                /* var_dump( $db->error() ); 
-                                 var_dump( $db->log() );  */
 
                                 if ($reservas) {
                                     foreach ($reservas as $reserva) {
@@ -151,9 +151,16 @@ if (isset($varsesion)) {
                                 <div class="row">
                                     <div class="col-sm-4 formulario_registro">
                                         <label for="usuario">Usuario</label>
-                                        <select name="usuario" id="usuario" class="select_opt">
+                                        <select name="usuario" id="usuario" class="select_opt chosen-select">
                                             <option value="">Selecciona un usuario...</option>
-                                            <option value="1">Abraham Pech</option>
+                                                <?php 
+                                                try {
+                                                $items = $db->select("usuarios", "*", ["status_usr" => "1"]);
+                                                    foreach ($items as $item) {
+                                                        echo "<option value='$item[id_usr]'>$item[nombre_usr]</option>";
+                                                    }
+                                                } catch (Exception $e) {echo "<script>errorAlert()</script>";}
+                                                ?>
                                         </select>
                                         <label for="dia_inicio">Día de Reservación</label>
                                         <input type="date" name="dia_inicio" id="dia_inicio">
@@ -161,27 +168,47 @@ if (isset($varsesion)) {
                                         <input type="time" name="hora_inicio" id="hora_inicio">
 
                                         <label for="servicio">Servicio</label>
-                                        <select name="servicio" id="servicio" class="select_opt">
+                                        <select name="servicio" id="servicio" class="select_opt chosen-select">
                                             <option value="">Selecciona un servicio...</option>
-                                            <option value="1">servicio</option>
+                                            <?php 
+                                                try {
+                                                $items = $db->select("servicios", "*", ["status" => "1"]);
+                                                    foreach ($items as $item) {
+                                                        echo "<option value='$item[id]'>$item[nombre]</option>";
+                                                    }
+                                                } catch (Exception $e) {echo "<script>errorAlert()</script>";}
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="Salon">Salon</label>
-                                        <select name="salon" id="salon" class="select_opt">
+                                        <select name="salon" id="salon" class="select_opt chosen-select">
                                             <option value="">Selecciona un salon...</option>
-                                            <option value="1">salon</option>
+                                            <?php 
+                                                try {
+                                                $items = $db->select("salones", "*", ["status" => "1"]);
+                                                    foreach ($items as $item) {
+                                                        echo "<option value='$item[id_grados]'>$item[nombre]</option>";
+                                                    }
+                                                } catch (Exception $e) {echo "<script>errorAlert()</script>";}
+                                            ?>
                                         </select>
                                         <label for="canon">Cañon</label>
-                                        <select name="canon" id="canon" class="select_opt">
+                                        <select name="canon" id="canon" class="select_opt  chosen-select">
                                             <option value="">Selecciona un cañon...</option>
-                                            <option value="1">Cañon</option>
+                                            <?php 
+                                            try {
+                                            $items = $db->select("canones", "*", ["status_can" => "1"]);
+                                                foreach ($items as $item) {
+                                                    echo "<option value='$item[id_can]'>$item[nombre_can]</option>";
+                                                }
+                                            } catch (Exception $e) {echo "<script>errorAlert()</script>";}
+                                            ?>
                                         </select>
                                         <label for="comentarios">comentarios</label>
                                         <input type="text" name="comentarios" id="comentarios">
                                         <label for="accesorios">Accesorios</label>
                                         <input type="text" name="accesorios" id="accesorios">
-
                                     </div>
 
                                     <div class="col-sm-4 table-responsive">
@@ -206,79 +233,7 @@ if (isset($varsesion)) {
                                     <button type="button" class="btn-cancelar">Cancelar</button>
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col">
-                                    <select id="usuario" name="usuario" class="select_opt">
-                                        <option value="">Usuario</option>
-                                        <?php
-                                            $usuarios = $db->select("usuarios", "*");
-                                            if ($usuarios) {
-                                                foreach ($usuarios as $usuario) {
-                                                    echo "<option value='$usuario[id_usr]'>$usuario[nombre_usr]</option>";
-                                                }
-                                            } else {
-                                                echo "<script>errorAlert()</script>";
-                                            }
-                                            ?>
-                                    </select>
-                                    <input type="date" name="fecha_inicio" id="fecha_inicio">
-                                    <input type="date" name="fecha_fin" id="fecha_fin">
-                                    <input type="time" name="hora_inicio" id="hora_inicio">
-                                </div>
-                                <div class="col">
-                                    <input type="time" name="hora_fin" id="hora_fin">
-                                    <select id="servicio" name="servicio" class="select_opt">
-                                        <option value="">Servicio</option>
-                                        <?php
-                                            $servicios = $db->select("servicios", "*");
-                                            if ($servicios) {
-                                                foreach ($servicios as $servicio) {
-                                                    echo "<option value='$servicio[id]'>$servicio[nombre]</option>";
-                                                }
-                                            } else {
-                                                echo "<script>errorAlert()</script>";
-                                            }
 
-                                            ?>
-                                    </select>
-                                    <select id="canon" name="canon" class="select_opt">
-                                        <option value="">Cañon</option>
-                                        <?php
-                                            $canones = $db->select("canones", "*");
-                                            if ($canones) {
-                                                foreach ($canones as $canon) {
-                                                    echo "<option value='$canon[id_can]'>$canon[nombre_can]</option>";
-                                                }
-                                            } else {
-                                                echo "<script>errorAlert()</script>";
-                                            }
-
-                                            ?>
-                                    </select>
-                                    <select id="salon" name="salon" class="select_opt">
-                                        <option value="">salon</option>
-                                        <?php
-                                            $salones = $db->select("salones", "*");
-                                            if ($salones) {
-                                                foreach ($salones as $salon) {
-                                                    echo "<option value='$salon[id_salones]'>$salon[nombre]</option>";
-                                                }
-                                            } else {
-                                                echo "<script>errorAlert()</script>";
-                                            }
-
-                                            ?>
-                                    </select>
-                                </div>
-                                <input type="text" name="comentario" id="comentario" placeholder="Comentario">
-                                <input type="text" name="accesorio" id="accesorio" placeholder="Accesorios">
-                                <select id="status" name="status" class="select_opt">
-                                    <option value="">Status</option>
-                                    <option value="1">Activo</option>
-                                    <option value="0">Inactivo</option>
-                                </select>
-                                <button type="button" id="btn-form">Apartar cañon <i class="fas fa-level-up-alt fa-sm"></i></button>
-                            </div> -->
                         </form>
                     </div>
                     <!-- FIN FORMULARIO -->
