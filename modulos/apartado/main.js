@@ -218,4 +218,10 @@ $(document).ready(function() {
       $(this).val("");
     });
   }
+
+  $(".chosen-select").chosen({
+    width: "100%",
+    no_results_text: "No se encontraron resultados"
+  });
+
 });
