@@ -224,4 +224,10 @@ $(document).ready(function() {
     no_results_text: "No se encontraron resultados"
   });
 
+  $('#hora_inicio').timepicker({
+     'scrollDefault': 'now',
+     'minTime': '7:00am',
+     'maxTime': '10:00pm',
+     'interval': 30
+  });
 });

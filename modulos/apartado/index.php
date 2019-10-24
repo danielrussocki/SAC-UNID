@@ -17,6 +17,7 @@ if (isset($varsesion)) {
         <link rel="stylesheet" href="/vendor/components/bootstrap/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="/vendor/harvesthq/chosen/chosen.css" />
+        <link rel="stylesheet" href="/vendor/jonthornton/jquery-timepicker/jquery.timepicker.css">
         <script src="/vendor/components/jquery/jquery.min.js"></script>
         <script src="/vendor/harvesthq/chosen/chosen.jquery.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -164,8 +165,8 @@ if (isset($varsesion)) {
                                         </select>
                                         <label for="dia_inicio">Día de Reservación</label>
                                         <input type="date" name="dia_inicio" id="dia_inicio">
-                                        <label for="hora_inicio">hora</label>
-                                        <input type="time" name="hora_inicio" id="hora_inicio">
+                                        <label for="hora_inicio">Hora</label>
+                                        <input id="hora_inicio" name="hora_inicio" type="text" class="time ui-timepicker-input" autocomplete="off">
 
                                         <label for="servicio">Servicio</label>
                                         <select name="servicio" id="servicio" class="select_opt chosen-select">
@@ -243,6 +244,7 @@ if (isset($varsesion)) {
         <footer>
             <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
         </footer>
+        <script src="/vendor/jonthornton/jquery-timepicker/jquery.timepicker.js"></script>
         <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
         <script src="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
         <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
