@@ -142,7 +142,7 @@ $(document).ready(function() {
       .map(function(i, e) {
         let $this = $(this);
         $this.removeClass("error-campo");
-        if ($this.val() == "") {
+        if ($this.val() == "" && !$this.hasClass("norequerido")) {
           $this.addClass("error-campo");
           flag = false;
         } else {
@@ -169,6 +169,7 @@ $(document).ready(function() {
         </tr>
     `;
       if ($(this).hasClass("btn-editar")) {
+
       } else {
         $("#tabla_interna tbody").append(template);
       }
@@ -203,25 +204,30 @@ $(document).ready(function() {
       .addClass("btn-editar");
     let json = $("#" + padre + " input").val();
     let obj = JSON.parse(json);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
-    $("#usuario").val(obj.usuario);
+    $("#usuario").val(obj.usuario).trigger("chosen:updated");
+    $("#dia_inicio").val(obj.dia_inicio);
+    $("#hora_inicio").val(obj.hora_inicio);
+    $("#servicio").val(obj.servicio).trigger("chosen:updated");
+    $("#salon").val(obj.salon).trigger("chosen:updated");
+    $("#canon").val(obj.canon).trigger("chosen:updated");
+    $("#comentarios").val(obj.comentarios);
+    $("#accesorios").val(obj.accesorios);
   });
 
   function reset_content(selector) {
     $(selector + " input, " + selector + " select").each(function() {
       $(this).val("");
     });
+    $(".chosen-select").val("").trigger("chosen:updated");
   }
 
   $(".chosen-select").chosen({
     width: "100%",
     no_results_text: "No se encontraron resultados"
+  
+  }).change(function(){
+
+    $(".chosen-search").find("input").addClass("norequerido");
   });
 
   $('#hora_inicio').timepicker({

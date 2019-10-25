@@ -183,7 +183,7 @@ if (isset($varsesion)) {
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-4 formulario_registro">
                                         <label for="Salon">Salon</label>
                                         <select name="salon" id="salon" class="select_opt chosen-select">
                                             <option value="">Selecciona un salon...</option>
