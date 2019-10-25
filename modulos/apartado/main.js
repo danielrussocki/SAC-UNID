@@ -230,4 +230,9 @@ $(document).ready(function() {
      'maxTime': '10:00pm',
      'interval': 30
   });
+
+    $( "#dia_inicio" ).datepicker({
+      "maxDate":"+3m",
+      "minDate":"now"
+    });
 });

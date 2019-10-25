@@ -18,7 +18,9 @@ if (isset($varsesion)) {
         <link rel="stylesheet" href="/vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
         <link rel="stylesheet" href="/vendor/harvesthq/chosen/chosen.css" />
         <link rel="stylesheet" href="/vendor/jonthornton/jquery-timepicker/jquery.timepicker.css">
+        <link rel="stylesheet" href="/vendor/components/jqueryui/themes/black-tie/jquery-ui.css" />
         <script src="/vendor/components/jquery/jquery.min.js"></script>
+        <script src="/vendor/components/jqueryui/jquery-ui.min.js"></script>
         <script src="/vendor/harvesthq/chosen/chosen.jquery.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="/js/alert.js"></script>
@@ -164,7 +166,7 @@ if (isset($varsesion)) {
                                                 ?>
                                         </select>
                                         <label for="dia_inicio">Día de Reservación</label>
-                                        <input type="date" name="dia_inicio" id="dia_inicio">
+                                        <input type="text" name="dia_inicio" id="dia_inicio">
                                         <label for="hora_inicio">Hora</label>
                                         <input id="hora_inicio" name="hora_inicio" type="text" class="time ui-timepicker-input" autocomplete="off">
 
