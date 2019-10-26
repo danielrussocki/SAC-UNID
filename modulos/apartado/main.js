@@ -137,7 +137,7 @@ $(document).ready(function() {
   $("#btn-interno").click(function() {
     let flag = true;
     let obj = {};
-    $("#apartado-form")
+    $(".formulario_registro")
       .find("input, select")
       .map(function(i, e) {
         let $this = $(this);
@@ -146,14 +146,17 @@ $(document).ready(function() {
           $this.addClass("error-campo");
           flag = false;
         } else {
-          obj[$this.prop("name")] = $this.val();
+          if($(this).val() != ""){
+            obj[$this.prop("name")] = $this.val();
+          }
           if ($this.prop("type") == "select-one") {
             obj[$this.prop("name") + "_texto"] = $this.find("option:selected").text();
           }
         }
       });
     if (flag) {
-      let id = $.now();
+      let session = sessionStorage.getItem("id");
+      let id = (session != null) ? session : $.now();
       let json = JSON.stringify(obj);
       let template = `
         <tr id="${id}">
@@ -169,6 +172,11 @@ $(document).ready(function() {
         </tr>
     `;
       if ($(this).hasClass("btn-editar")) {
+        $("#" + id).replaceWith(template);
+        $("#btn-interno")
+      .text("AGREGAR")
+      .removeClass("btn-editar");
+      sessionStorage.removeItem("id");
 
       } else {
         $("#tabla_interna tbody").append(template);
@@ -204,41 +212,55 @@ $(document).ready(function() {
       .addClass("btn-editar");
     let json = $("#" + padre + " input").val();
     let obj = JSON.parse(json);
-    $("#usuario").val(obj.usuario).trigger("chosen:updated");
+    $("#usuario")
+      .val(obj.usuario)
+      .trigger("chosen:updated");
     $("#dia_inicio").val(obj.dia_inicio);
     $("#hora_inicio").val(obj.hora_inicio);
-    $("#servicio").val(obj.servicio).trigger("chosen:updated");
-    $("#salon").val(obj.salon).trigger("chosen:updated");
-    $("#canon").val(obj.canon).trigger("chosen:updated");
+    $("#servicio")
+      .val(obj.servicio)
+      .trigger("chosen:updated");
+    $("#salon")
+      .val(obj.salon)
+      .trigger("chosen:updated");
+    $("#canon")
+      .val(obj.canon)
+      .trigger("chosen:updated");
     $("#comentarios").val(obj.comentarios);
     $("#accesorios").val(obj.accesorios);
+    $("#accesorios").val(obj.accesorios);
+    $("#id-reserva").val(obj.id);
   });
 
   function reset_content(selector) {
     $(selector + " input, " + selector + " select").each(function() {
       $(this).val("");
     });
-    $(".chosen-select").val("").trigger("chosen:updated");
+    $(".chosen-select")
+      .val("")
+      .trigger("chosen:updated");
   }
 
-  $(".chosen-select").chosen({
-    width: "100%",
-    no_results_text: "No se encontraron resultados"
-  
-  }).change(function(){
-
-    $(".chosen-search").find("input").addClass("norequerido");
-  });
-
-  $('#hora_inicio').timepicker({
-     'scrollDefault': 'now',
-     'minTime': '7:00am',
-     'maxTime': '10:00pm',
-     'interval': 30
-  });
-
-    $( "#dia_inicio" ).datepicker({
-      "maxDate":"+3m",
-      "minDate":"now"
+  $(".chosen-select")
+    .chosen({
+      width: "100%",
+      no_results_text: "No se encontraron resultados",
+    })
+    .change(function() {
+      $(".chosen-search")
+        .find("input")
+        .addClass("norequerido");
     });
+
+  $("#hora_inicio").timepicker({
+    scrollDefault: "now",
+    minTime: "7:00am",
+    maxTime: "10:00pm",
+    interval: 30,
+  });
+
+  $("#dia_inicio").datepicker({
+    maxDate: "+3m",
+    minDate: "now",
+  });
 });
