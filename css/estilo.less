@@ -33,7 +33,6 @@ body {
     // overflow-y: scroll;
     .icon-container{
         display: inline-block;
-        width: 22px;
     }
     a p{
         box-sizing: border-box;
@@ -43,7 +42,10 @@ body {
         a{
             text-align: center;
         }
-        a p{
+        a .sidebar-text{
+            display: none;
+        }
+        ul li ul li a .sidebar-text{
             display: none;
         }
     }
@@ -70,13 +72,22 @@ body {
     padding: 12px;
 }
 
-.wrapper .sidebar p{
+.wrapper .sidebar .sidebar-text{
     display: inline;
+    margin-left: 10px;
 }
 
 .wrapper .sidebar ul li:hover {
     background: @backhoverul;
     transition: background-color .4s;
+
+    ul li:hover{
+        background: white;
+    }
+
+    ul li:hover a{
+        color: @backhoverul;
+    }
 }
 
 .wrapper .sidebar ul li:hover a {

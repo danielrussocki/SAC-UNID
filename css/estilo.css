@@ -24,7 +24,6 @@ body {
 }
 .wrapper .sidebar .icon-container {
   display: inline-block;
-  width: 22px;
 }
 .wrapper .sidebar a p {
   box-sizing: border-box;
@@ -36,7 +35,10 @@ body {
   .wrapper .sidebar a {
     text-align: center;
   }
-  .wrapper .sidebar a p {
+  .wrapper .sidebar a .sidebar-text {
+    display: none;
+  }
+  .wrapper .sidebar ul li ul li a .sidebar-text {
     display: none;
   }
 }
@@ -58,12 +60,19 @@ body {
   text-decoration: none;
   padding: 12px;
 }
-.wrapper .sidebar p {
+.wrapper .sidebar .sidebar-text {
   display: inline;
+  margin-left: 10px;
 }
 .wrapper .sidebar ul li:hover {
   background: #594f8d;
   transition: background-color 0.4s;
+}
+.wrapper .sidebar ul li:hover ul li:hover {
+  background: white;
+}
+.wrapper .sidebar ul li:hover ul li:hover a {
+  color: #594f8d;
 }
 .wrapper .sidebar ul li:hover a {
   color: #fff;

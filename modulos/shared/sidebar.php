@@ -6,7 +6,9 @@
 ?>
 <aside class="sidebar">
     <ul>
-        <li><a href='/modulos/apartado/index.php/'><i class="fas fa-calendar"></i> Apartado</a></li>
+        <li>
+            <a href='/modulos/apartado/index.php/'><i class="fas fa-calendar"></i><p class="sidebar-text">Apartado</p></a>
+        </li>
     </ul>
 </aside>
 <?php
@@ -14,7 +16,9 @@
 ?>
 <aside class="sidebar">
     <ul>
-        <li><a href='/modulos/apartado/index.php/'><i class="fas fa-calendar"></i> Apartado</a></li>
+        <li>
+            <a href='/modulos/apartado/index.php/'><i class="fas fa-calendar"></i><p class="sidebar-text">Apartado</p></a>
+        </li>
     </ul>
 </aside>
 <?php
@@ -23,31 +27,51 @@
 <aside class="sidebar">
     <ul>
         <li>
-            <a href='/modulos/usuarios/index.php/'><span class="icon-container"><i class="fas fa-users"></i></span><p class="sidebar-text"> Usuarios</p></a>
+            <a href='/modulos/apartado/index.php/'><i class="fas fa-calendar"></i><p class="sidebar-text">Apartado</p></a>
         </li>
         <li>
-            <a href='/modulos/canones/index.php/'><span class="icon-container"><i class="fas fa-eye"></i></span><p class="sidebar-text"> Cañones</p></a>
+            <a href="#canonSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-eye"></i><p class="sidebar-text">Cañones</p></a>
+            <ul class="collapse list-unstyled" id="canonSubmenu">
+                <li>
+                    <a href="/modulos/canones/index.php/"><i class="fas fa-eye"></i><p class="sidebar-text">Cañones</p></a>
+                </li>
+                <li>
+                    <a href="/modulos/entradas/index.php/"><i class="fas fa-plug"></i><p class="sidebar-text">Entradas</p></a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href='/modulos/entradas/index.php/'><span class="icon-container"><i class="fas fa-plug"></i></span><p class="sidebar-text"> Entradas</p></a>
+            <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user"></i><p class="sidebar-text">Usuarios</p></a>
+            <ul class="collapse list-unstyled" id="userSubmenu">
+                <li>
+                    <a href="/modulos/usuarios/index.php/"><i class="fas fa-user"></i><p class="sidebar-text">Usuarios</p></a>
+                </li>
+                <li>
+                    <a href="/modulos/niveles/index.php/"><i class="fas fa-level-up-alt"></i><p class="sidebar-text">Niveles</p></a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href='/modulos/niveles/index.php/'><span class="icon-container"><i class="fas fa-level-up-alt"></i></span><p class="sidebar-text"> Niveles</p></a>
+            <a href="#campusSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-school"></i><p class="sidebar-text">Campus</p></a>
+            <ul class="collapse list-unstyled" id="campusSubmenu">
+                <li>
+                    <a href="/modulos/grados/index.php/"><i class="fas fa-graduation-cap"></i><p class="sidebar-text">Grados</p></a>
+                </li>
+                <li>
+                    <a href="/modulos/salones/index.php/"><i class="fas fa-door-open"></i><p class="sidebar-text">Salones</p></a>
+                </li>
+                <li>
+                    <a href="/modulos/servicios/index.php/"><i class="fas fa-place-of-worship"></i><p class="sidebar-text">Servicios</p></a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href='/modulos/servicios/index.php/'><span class="icon-container"><i class="fas fa-clipboard-check"></i></span><p class="sidebar-text"> Servicios</p></a>
-        </li>
-        <li>
-            <a href='/modulos/apartado/index.php/'><span class="icon-container"><i class="fas fa-calendar"></i></span><p class="sidebar-text"> Apartado</p></a>
-        </li>
-        <li>
-            <a href='/modulos/grados/index.php/'><span><i class="fas fa-book-reader"></i></span><p class="sidebar-text"> Grados</p></a>
-        </li>
-        <li>
-            <a href='/modulos/salones/index.php/'><span><i class="fas fa-archway"></i></span><p class="sidebar-text"> Salones</p></a>
-        </li>
-        <li>
-            <a href='/modulos/logs/index.php/'><span><i class="fas fa-door-open"></i></span><p class="sidebar-text"> Logs</p></a>
+            <a href="#configSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-cogs"></i><p class="sidebar-text">Configuración</p></a>
+            <ul class="collapse list-unstyled" id="configSubmenu">
+                <li>
+                    <a href="/modulos/logs/index.php/"><i class="fas fa-history"></i><p class="sidebar-text">Logs</p></a>
+                </li>
+            </ul>
         </li>
     </ul>
 </aside>
