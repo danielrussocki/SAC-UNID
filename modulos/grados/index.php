@@ -87,7 +87,10 @@
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
+                        <div class="col-sm-4 mx-auto">
                         <button type="button" id="btn-form">Registrar nivel <i class="fas fa-level-up-alt fa-sm"></i></button>
+                         </div>
+                        </div>  
                     </form>
                 </div>
                 <!-- FIN FORMULARIO -->

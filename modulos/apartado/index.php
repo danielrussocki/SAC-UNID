@@ -232,8 +232,14 @@ if (isset($varsesion)) {
                                             <tbody></tbody>
                                         </table>
                                     </div>
-                                    <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
-                                    <button type="button" class="btn-cancelar">Cancelar</button>
+                                    </div>
+                                    <div class="row mt-3">
+                                    <div class="col-sm-4">
+                                        <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
+                                    </div>
+                                    <div class="col-sm-4 ml-auto">
+                                        <button type="button" class="btn-cancelar">Cancelar</button>
+                                    </div>
                                 </div>
                             </div>
 

@@ -109,8 +109,10 @@
                             <option value="0">Inactivo</option>
                         </select> 
                         -->
-
-                        <button type="button" id="btn-form">Registrar servicio</button>
+                        <div class="col-sm-4 mx-auto">
+                         <button type="button" id="btn-form">Registrar servicio</button>
+                         </div>
+                        </div>          
                     </form>
                 </div>
                 <!-- FIN FORMULARIO -->

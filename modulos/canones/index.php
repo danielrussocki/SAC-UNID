@@ -165,7 +165,11 @@
                 </div>
               </div>
               <input type="text" name="serie" id="serie" placeholder="N. serie" />
+              <div class="row mt-3">
+              <div class="col-sm-4 mx-auto">
               <button type="button" id="btn-form">Registrar cañon <i class="fas fa-eye fa-sm"></i></button>
+              </div>
+              </div>
             </form>
           </div>
           <!-- FIN FORMULARIO -->

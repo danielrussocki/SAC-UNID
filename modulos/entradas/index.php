@@ -95,7 +95,11 @@
                         <input type="radio" class="custom-control-input" id="status2" name="status">
                         <label class="custom-control-label" for="status2">Activo</label>
                     </div>
-                        <button type="button" id="btn-form">Registrar entrada <i class="fas fa-plug fa-sm"></i></button>
+                    <div class="row mt-3">
+                    <div class="col-sm-4 mx-auto">
+                    <button type="button" id="btn-form">Registrar entrada <i class="fas fa-plug fa-sm"></i></button>
+                    </div>
+                    </div>
                     </form>
                 </div>
                 <!-- FIN FORMULARIO -->
