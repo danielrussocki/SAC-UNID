@@ -35,9 +35,9 @@
         </div>
       </div>
     </section>
-    <footer>
+    <!-- <footer>
       <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
-    </footer>
+    </footer> -->
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
     <script src="/vendor/components/bootstrap/js/bootstrap.min.js"></script>
     <script src="/js/main.js"></script>
