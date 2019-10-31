@@ -38,7 +38,7 @@
             <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
           </div>
         </div>
-        <div class="info">
+        <div class="info table-responsive-xl">
           <!-- TABLA -->
           <table id="table_id" class="table table-striped table-bordered" style="width:100%; height:80%">
             <thead>
@@ -124,9 +124,9 @@
       </div>
     </section>
     <section>
-      <footer>
+      <!-- <footer>
         <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
-      </footer>
+      </footer> -->
     </section>
     <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
     <script src ="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>

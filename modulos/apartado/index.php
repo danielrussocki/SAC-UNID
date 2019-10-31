@@ -51,7 +51,7 @@ if (isset($varsesion)) {
                         }
                         ?>
                 </div>
-                <div class="info">
+                <div class="info table-responsive">
                     <table id="table_apartado" class="table table-striped table-bordered" style="width:100%; height:80%">
                         <thead class="thead-dark">
                             <tr>
@@ -249,9 +249,9 @@ if (isset($varsesion)) {
                 </div>
             </div>
         </section>
-        <footer>
+        <!-- <footer>
             <p><i class="fas fa-user-lock"></i> Sistema desarrollado por La Logia Corp.</p>
-        </footer>
+        </footer> -->
         <script src="/vendor/jonthornton/jquery-timepicker/jquery.timepicker.js"></script>
         <script src="/vendor/fortawesome/font-awesome/js/all.js" data-auto-replace-svg="nest"></script>
         <script src="/vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
