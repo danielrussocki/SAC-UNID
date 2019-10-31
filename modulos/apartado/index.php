@@ -44,7 +44,7 @@ if (isset($varsesion)) {
                         <div class="boton-nuevo" id="btn-new" onClick="newAlert()">
                             <a href="#"><i class="fas fa-calendar fa-lg" title="Apartar cañon"></i></a>
                         </div>
-                        <div class="boton-cancelar" id="btn-cancel" onClick="cancelAlert()">
+                        <div class="boton-cancelar" id="btn-cancel" >
                             <a href="#"><i class="fas fa-times fa-lg" title="Cancelar"></i></a>
                         </div>
                     <?php
@@ -238,7 +238,7 @@ if (isset($varsesion)) {
                                         <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
                                     </div>
                                     <div class="col-sm-4 ml-auto">
-                                        <button type="button" class="btn-cancelar">Cancelar</button>
+                                        <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
                                     </div>
                                 </div>
                             </div>

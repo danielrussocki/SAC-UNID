@@ -1,17 +1,44 @@
-$(document).ready(function() {
+$(document).ready(function () {
   let obj = {};
-  $("#btn-new").click(function() {
+  $("#btn-new").click(function () {
     obj = {
       accion: "insertApartado",
     };
     $("#apartado-form")[0].reset();
     $("#btn-form").text("Apartar cañon");
     $("#btn-new").hide();
+    $("#apartado-form").show();
   });
-  $("#btn-cancel").click(function() {
-    $("#btn-new").show();
+
+  $("#btn-cancel").click(function (e) {
+    e.preventDefault();
+    var rowcount = $('#tabla_interna tr').length
+    if (rowcount > 1) {
+      swal({
+        title: "¿Estás seguro?",
+        text: "Los datos ingresados se perderán",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          $("#tabla_interna tbody").empty();
+          reset_content(".formulario_registro");
+          $("#btn-new").show();
+          $("#table_apartado_wrapper").show();
+          $("#btn-cancel").hide();
+          $("#apartado-form").hide();
+        }
+      });
+    } else {
+      $("#btn-new").show();
+      $("#table_apartado_wrapper").show();
+      $("#btn-cancel").hide();
+      $("#apartado-form").hide();
+    }
   });
-  $(".btn-delete").click(function() {
+
+  $(".btn-delete").click(function () {
     let id = $(this).attr("data");
     obj = {
       accion: "deleteApartado",
@@ -28,7 +55,7 @@ $(document).ready(function() {
         $.post(
           "/modulos/apartado/consultas.php",
           obj,
-          function(respuesta) {
+          function (respuesta) {
             if (respuesta.status == 1) {
               swal("Éxito", "El apartado fue eliminado correctamente", "success").then(() => {
                 cancelAlert();
@@ -43,7 +70,7 @@ $(document).ready(function() {
       }
     });
   });
-  $(".btn-edit").click(function() {
+  $(".btn-edit").click(function () {
     let id = $(this).attr("data");
     obj = {
       accion: "getApartado",
@@ -52,7 +79,7 @@ $(document).ready(function() {
     $.post(
       "/modulos/apartado/consultas.php",
       obj,
-      function(respuesta) {
+      function (respuesta) {
         $("#usuario").val(respuesta.usuario);
         $("#fecha_inicio").val(respuesta.fecha_inicio);
         $("#fecha_fin").val(respuesta.fecha_fin);
@@ -73,15 +100,15 @@ $(document).ready(function() {
     );
     $("#btn-form").text("Editar apartado");
   });
-  $("#btn-form").click(function() {
+  $("#btn-form").click(function () {
     $("#apartado-form")
       .find("input")
-      .map(function(i, e) {
+      .map(function (i, e) {
         obj[$(this).prop("name")] = $(this).val();
       });
     $("#apartado-form")
       .find("select")
-      .map(function(i, e) {
+      .map(function (i, e) {
         obj[$(this).prop("name")] = $(this).val();
       });
 
@@ -90,7 +117,7 @@ $(document).ready(function() {
         $.post(
           "/modulos/apartado/consultas.php",
           obj,
-          function(respuesta) {
+          function (respuesta) {
             if (respuesta.status == 0) {
               swal("¡ERROR!", "Campos vacios", "error");
             } else if (respuesta.status == 1) {
@@ -109,7 +136,7 @@ $(document).ready(function() {
         $.post(
           "/modulos/apartado/consultas.php",
           obj,
-          function(respuesta) {
+          function (respuesta) {
             if (respuesta.status == 0) {
               swal("¡ERROR!", "Campos vacios", "error");
             }
@@ -134,12 +161,12 @@ $(document).ready(function() {
     lengthChange: false,
   });
 
-  $("#btn-interno").click(function() {
+  $("#btn-interno").click(function () {
     let flag = true;
     let obj = {};
     $(".formulario_registro")
       .find("input, select")
-      .map(function(i, e) {
+      .map(function (i, e) {
         let $this = $(this);
         $this.removeClass("error-campo");
         if ($this.val() == "" && !$this.hasClass("norequerido")) {
@@ -188,7 +215,7 @@ $(document).ready(function() {
     }
   });
 
-  $("#tabla_interna").on("click", ".eliminar-interno", function(e) {
+  $("#tabla_interna").on("click", ".eliminar-interno", function (e) {
     e.preventDefault();
     let padre = $(this).data("id");
     swal({
@@ -203,7 +230,7 @@ $(document).ready(function() {
     });
   });
 
-  $("#tabla_interna").on("click", ".editar-interno", function(e) {
+  $("#tabla_interna").on("click", ".editar-interno", function (e) {
     e.preventDefault();
     let padre = $(this).data("id");
     sessionStorage.setItem("id", padre);
@@ -232,8 +259,27 @@ $(document).ready(function() {
     $("#id-reserva").val(obj.id);
   });
 
+  $("#btn-cancelar").click(function (e) {
+    e.preventDefault();
+    var rowcount = $('#tabla_interna tr').length
+    if (rowcount > 1) {
+      swal({
+        title: "¿Estás seguro?",
+        text: "Los datos ingresados se perderán",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          $("#tabla_interna tbody").empty();
+          reset_content(".formulario_registro");
+        }
+      });
+    }
+  });
+
   function reset_content(selector) {
-    $(selector + " input, " + selector + " select").each(function() {
+    $(selector + " input, " + selector + " select").each(function () {
       $(this).val("");
     });
     $(".chosen-select")
