@@ -158,7 +158,11 @@ $(document).ready(function() {
     }
   });
   $("#table_apartado").DataTable({
-    lengthChange: false,
+
+    order:[1,'des'],
+    lengthChange: true
+
+    
   });
 
   $("#btn-interno").click(function() {

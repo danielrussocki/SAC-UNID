@@ -51,8 +51,8 @@ if (isset($varsesion)) {
                         }
                         ?>
                 </div>
-                <div class="info table-responsive">
-                    <table id="table_apartado" class="table table-striped table-bordered" style="width:100%; height:80%">
+                <div class="info table ">
+                    <table id="table_apartado" class="table responsive compact display cell-border" style= "width:95%" >
                         <thead class="thead-dark">
                             <tr>
                                 <th>Usuario</th>
@@ -127,7 +127,9 @@ if (isset($varsesion)) {
                                         <td><?php echo $reserva['nombre_salon']; ?></td>
                                         <td><?php echo utf8_encode($reserva['comentarios']); ?></td>
                                         <td><?php echo utf8_encode($reserva['accesorios']); ?></td>
-                                        <td><?php echo $reserva['status']; ?></td>
+                                        <td><?php if($reserva['status']== 0)
+                                        { echo "inactivo";}
+                                        else{ echo "activo";} ?></td>
                                         <?php
                                                     if ($nivel == 1) { } else {
                                                         ?>
