@@ -213,7 +213,6 @@ if (isset($varsesion)) {
                                         <label for="accesorios">Accesorios</label>
                                         <input type="text" name="accesorios" id="accesorios">
                                     </div>
-
                                     <div class="col-sm-4 table-responsive">
                                         <table class="table table-striped" id="tabla_interna">
                                             <thead>
@@ -239,6 +238,9 @@ if (isset($varsesion)) {
                                     </div>
                                     <div class="col-sm-4 ml-auto">
                                         <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
+                                    </div>
+                                    <div class="col-sm-4 ml-auto">
+                                        <button type="button" id="btn-reservar" class="btn-reservar">Reservar</button>
                                     </div>
                                 </div>
                             </div>
