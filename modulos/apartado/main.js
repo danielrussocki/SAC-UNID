@@ -277,13 +277,18 @@ $(document).ready(function() {
     }
   });
 
-  $("#btn-reservar").click(function() {
-    let map = {};
-    let i = 0;
-    $("input:hidden").each(function() {
-      map[i] = $(this).val();
-      i++;
+  $("#btn-reservar").click(function(e) {
+    e.preventDefault();
+    let map = {
+      accion: "guardar"
+    }; 
+    let arreglo = [];
+    $("#tabla_interna input").each(function() {
+      arreglo.push($(this).val());
     });
+    if(arreglo.length > 0){
+      map["datos"] = arreglo;
+    }
     $.post("/modulos/apartado/consultas.php", map, function(respuesta) {}, "JSON");
   });
 

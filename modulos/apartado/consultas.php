@@ -21,8 +21,38 @@ if ($_POST) {
 		case 'deleteApartado':
 			deleteApartado($_POST['id']);
 			break;
+		case 'guardar':
+			guardar();
+			break;
 		default:
 			break;
+	}
+}
+function guardar(){
+	global $db;
+	$datos = $_POST["datos"];
+	$contador = count($datos);
+	if($contador > 0){
+		$todos = [];
+		foreach($datos as $dato => $valor){
+			$registro = json_decode($valor);
+			$fecha_inicio = date("Y-m-d", strtotime($registro->dia_inicio));
+			$hora_inicio = date("H:i:s", strtotime($registro->hora_inicio));
+			$arreglo = [
+				"accesorios" => $registro->accesorios,
+				"canon_id" => $registro->canon,
+				"comentarios" => $registro->comentarios,
+				"fecha_fin" => $fecha_inicio,
+				"fecha_inicio" => $fecha_inicio,
+				"hora_inicio" => $hora_inicio,
+				"hora_fin" => $hora_inicio,
+				"salon_id" => $registro->salon,
+				"servicios_id" => $registro->servicio,
+				"usr_id" => $registro->usuario
+			];
+			array_push($todos, $arreglo);
+		}
+		$db->insert("reservas", $todos);
 	}
 }
 function insertApartado()

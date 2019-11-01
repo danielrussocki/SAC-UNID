@@ -1,0 +1,1 @@
+INSERT INTO `reservas` (`accesorios`, `canon_id`, `comentarios`, `fecha_inicio`, `hora_inicio`, `salon_id`, `servicios_id`, `usr_id`) VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL), ('hbjhsb', '39', 'hjbsdc', '10/31/2019', '9:00pm', '1', '16', '28'), ('hjhbjb', '71', 'jhdhbsjsb', '10/31/2019', '9:00pm', '1', '16', '34')
