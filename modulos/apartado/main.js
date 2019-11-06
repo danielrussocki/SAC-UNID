@@ -1,44 +1,42 @@
-$(document).ready(function() {
-  let obj = {};
-  $("#btn-new").click(function() {
-    obj = {
-      accion: "insertApartado",
-    };
-    $("#apartado-form")[0].reset();
-    $("#btn-form").text("Apartar cañon");
-    $("#btn-new").hide();
-    $("#apartado-form").show();
-  });
+$(document).ready(function () {
 
-  $("#btn-cancel").click(function(e) {
-    e.preventDefault();
-    var rowcount = $("#tabla_interna tr").length;
-    if (rowcount == 1) {
-      swal({
-        title: "¿Estás seguro?",
-        text: "Los datos ingresados se perderán",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then(willDelete => {
-        if (willDelete) {
-          $("#tabla_interna tbody").empty();
-          reset_content(".formulario_registro");
-          $("#btn-new").show();
-          $("#table_apartado_wrapper").show();
-          $("#btn-cancel").hide();
-          $("#apartado-form").hide();
-        }
-      });
-    } else {
-      $("#btn-new").show();
-      $("#table_apartado_wrapper").show();
-      $("#btn-cancel").hide();
-      $("#apartado-form").hide();
+  var rowcounttabla = $("#tabla_interna > tbody > tr").length;
+  if (rowcounttabla == 0) {
+    $("#btn-reservar").hide();
+    $("#tabla_interna").hide();
+  }
+
+  function countTrs(rowcount) {
+    if (rowcount == 0) {
+      $("#btn-reservar").hide();
+      $("#tabla_interna").hide();
+    } else if (rowcount > 0) {
+      $("#btn-reservar").show();
+      $("#tabla_interna").show();
     }
+  }
+
+  let obj = {};
+
+  $("#btn-new").click(function () {
+    $("#btn-new").hide();
   });
 
-  $(".btn-delete").click(function() {
+  $("#btn-cancel").click(function (e) {
+    swal({
+      title: "¿Estás seguro?",
+      text: "Los datos ingresados se perderán",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(willDelete => {
+      if (willDelete) {
+        location.reload();
+      }
+    });
+  });
+
+  $(".btn-delete").click(function () {
     let id = $(this).attr("data");
     obj = {
       accion: "deleteApartado",
@@ -55,7 +53,7 @@ $(document).ready(function() {
         $.post(
           "/modulos/apartado/consultas.php",
           obj,
-          function(respuesta) {
+          function (respuesta) {
             if (respuesta.status == 1) {
               swal("Éxito", "El apartado fue eliminado correctamente", "success").then(() => {
                 cancelAlert();
@@ -70,107 +68,55 @@ $(document).ready(function() {
       }
     });
   });
-  $(".btn-edit").click(function() {
-    let id = $(this).attr("data");
+
+  $(".btn-edit").click(function () {
+    $("#btn-interno").removeClass();
+    $("#btn-interno").addClass("btn-edit-logic");
+    $("#btn-interno").text("Editar");
+    $("#btn-cancelar").hide();
+    $("#btn-new").hide();
+    var id_edit = $(this).attr("data");
     obj = {
       accion: "getApartado",
-      id: id,
+      id: id_edit,
     };
     $.post(
       "/modulos/apartado/consultas.php",
       obj,
-      function(respuesta) {
-        $("#usuario").val(respuesta.usuario);
-        $("#fecha_inicio").val(respuesta.fecha_inicio);
-        $("#fecha_fin").val(respuesta.fecha_fin);
+      function (respuesta) {
+        $("#usuario")
+          .val(respuesta.usuario)
+          .trigger("chosen:updated");
+        $("#dia_inicio").val(respuesta.fecha_inicio);
         $("#hora_inicio").val(respuesta.hora_inicio);
-        $("#hora_fin").val(respuesta.hora_fin);
-        $("#servicio").val(respuesta.servicio);
-        $("#canon").val(respuesta.canon);
-        $("#salon").val(respuesta.salon);
-        $("#comentario").val(respuesta.comentario);
-        $("#accesorio").val(respuesta.accesorio);
-        $("#status").val(respuesta.status);
-        obj = {
-          accion: "updateApartado",
-          id: id,
-        };
+        $("#servicio")
+          .val(respuesta.servicio)
+          .trigger("chosen:updated");
+        $("#salon")
+          .val(respuesta.salon)
+          .trigger("chosen:updated");
+        $("#canon")
+          .val(respuesta.canon)
+          .trigger("chosen:updated");
+        $("#comentarios").val(respuesta.comentario);
+        $("#accesorios").val(respuesta.accesorio);
+        $("#id_usr").val(id_edit);
       },
       "JSON"
     );
-    $("#btn-form").text("Editar apartado");
   });
-  $("#btn-form").click(function() {
-    $("#apartado-form")
-      .find("input")
-      .map(function(i, e) {
-        obj[$(this).prop("name")] = $(this).val();
-      });
-    $("#apartado-form")
-      .find("select")
-      .map(function(i, e) {
-        obj[$(this).prop("name")] = $(this).val();
-      });
 
-    switch (obj.accion) {
-      case "insertApartado":
-        $.post(
-          "/modulos/apartado/consultas.php",
-          obj,
-          function(respuesta) {
-            if (respuesta.status == 0) {
-              swal("¡ERROR!", "Campos vacios", "error");
-            } else if (respuesta.status == 1) {
-              swal("Éxito", "Cañon apartado correctamente", "success").then(() => {
-                cancelAlert();
-                location.reload();
-              });
-            } else {
-              errorAlert();
-            }
-          },
-          "JSON"
-        );
-        break;
-      case "updateApartado":
-        $.post(
-          "/modulos/apartado/consultas.php",
-          obj,
-          function(respuesta) {
-            if (respuesta.status == 0) {
-              swal("¡ERROR!", "Campos vacios", "error");
-            }
-            if (respuesta.status == 1) {
-              swal("Éxito", "Cañón editado  correctamente", "success").then(() => {
-                cancelAlert();
-                location.reload();
-              });
-            } else {
-              errorAlert();
-            }
-          },
-          "JSON"
-        );
-        break;
-
-      default:
-        break;
-    }
-  });
   $("#table_apartado").DataTable({
-
-    order:[1,'des'],
+    order: [1, 'des'],
     lengthChange: true
-
-    
   });
 
-  $("#btn-interno").click(function() {
+  $("#btn-interno").click(function () {
     let flag = true;
     let obj = {};
     $(".formulario_registro")
       .find("input, select")
-      .map(function(i, e) {
+      .map(function (i, e) {
         let $this = $(this);
         $this.removeClass("error-campo");
         if ($this.val() == "" && !$this.hasClass("norequerido")) {
@@ -185,7 +131,36 @@ $(document).ready(function() {
           }
         }
       });
-    if (flag) {
+    if ($(this).hasClass("btn-edit-logic")) {
+      let id = $("#id_usr").val();
+      obj = {
+        accion: "updateApartado",
+        id: id,
+        usuario: $("#usuario").val(),
+        dia_inicio: $("#dia_inicio").val(),
+        hora_inicio: $("#hora_inicio").val(),
+        servicio: $("#servicio").val(),
+        salon: $("#salon").val(),
+        canon: $("#canon").val(),
+        comentarios: $("#comentarios").val(),
+        accesorios: $("#accesorios").val(),
+      };
+      $.post(
+        "/modulos/apartado/consultas.php",
+        obj,
+        function (respuesta) {
+          if (respuesta.status == 0) {
+            swal("¡ERROR!", "Campos vacios", "error");
+          } else if (respuesta.status == 1) {
+            swal("Éxito", "Apartado editado correctamente", "success").then(() => {
+              cancelAlert();
+              location.reload();
+            });
+          }
+        },
+        "JSON"
+      );
+    } else if (flag) {
       let session = sessionStorage.getItem("id");
       let id = session != null ? session : $.now();
       let json = JSON.stringify(obj);
@@ -199,7 +174,7 @@ $(document).ready(function() {
             <td>${obj.canon_texto}</td>
             <td>${obj.comentarios}</td>
             <td>${obj.accesorios}</td>
-            <td><input type="hidden" value='${json}'><a href="#" data-id="${id}" class="editar-interno">Editar</a> <a href="#" data-id="${id}" class="eliminar-interno">Eliminar</a></td>
+            <td><input type="hidden" id="input-hide" value='${json}'><a href="#" data-id="${id}" class="editar-interno">Editar</a> <a href="#" data-id="${id}" class="eliminar-interno">Eliminar</a></td>
         </tr>
     `;
       if ($(this).hasClass("btn-editar")) {
@@ -209,6 +184,8 @@ $(document).ready(function() {
           .removeClass("btn-editar");
         sessionStorage.removeItem("id");
       } else {
+        rowcounttabla++;
+        countTrs(rowcounttabla);
         $("#tabla_interna tbody").append(template);
       }
       reset_content(".formulario_registro");
@@ -218,7 +195,7 @@ $(document).ready(function() {
     }
   });
 
-  $("#tabla_interna").on("click", ".eliminar-interno", function(e) {
+  $("#tabla_interna").on("click", ".eliminar-interno", function (e) {
     e.preventDefault();
     let padre = $(this).data("id");
     swal({
@@ -228,12 +205,18 @@ $(document).ready(function() {
       buttons: true,
       dangerMode: true,
     }).then(willDelete => {
-      $("#" + padre).remove();
-      swal("Registro elimiando", "Se ha eliminado correctamente el registro", "success");
+      if (willDelete) {
+        $("#" + padre).remove();
+        swal("Registro elimiando", "Se ha eliminado correctamente el registro", "success");
+        rowcounttabla--;
+        countTrs(rowcounttabla);
+        reset_content(".formulario_registro");
+        $("#btn-interno").text("AGREGAR").removeClass("btn-editar");
+      }
     });
   });
 
-  $("#tabla_interna").on("click", ".editar-interno", function(e) {
+  $("#tabla_interna").on("click", ".editar-interno", function (e) {
     e.preventDefault();
     let padre = $(this).data("id");
     sessionStorage.setItem("id", padre);
@@ -262,9 +245,9 @@ $(document).ready(function() {
     $("#id-reserva").val(obj.id);
   });
 
-  $("#btn-cancelar").click(function(e) {
+  $("#btn-cancelar").click(function (e) {
     e.preventDefault();
-    var rowcount = $("#tabla_interna tr").length;
+    let rowcount = $("#tabla_interna tr").length;
     if (rowcount > 1) {
       swal({
         title: "¿Estás seguro?",
@@ -276,68 +259,81 @@ $(document).ready(function() {
         if (willDelete) {
           $("#tabla_interna tbody").empty();
           reset_content(".formulario_registro");
+          rowcounttabla = 0;
+          countTrs(rowcounttabla);
         }
       });
     }
   });
 
-  $("#btn-reservar").click(function(e) {
+  $("#btn-reservar").click(function (e) {
     e.preventDefault();
     let map = {
       accion: "guardar"
-    }; 
+    };
     let arreglo = [];
-    $("#tabla_interna input").each(function() {
+    $("#tabla_interna input").each(function () {
       arreglo.push($(this).val());
     });
-    if(arreglo.length > 0){
+    if (arreglo.length > 0) {
       map["datos"] = arreglo;
     }
-    $.post("/modulos/apartado/consultas.php", map, function(respuesta) {}, "JSON");
+    $.post("/modulos/apartado/consultas.php", map, function (respuesta) {
+      if (respuesta.status == 0) {
+        swal("¡ERROR!", "", "error");
+      } else if (respuesta.status == 1) {
+        swal("Éxito", "Se han guardado tus datos", "success").then(() => {
+          cancelAlert();
+          location.reload();
+        });
+      } else {
+        errorAlert();
+      }
+    }, "JSON");
   });
 
-  $("#btn-form").click(function() {
+  $("#btn-form").click(function () {
     $("#apartado-form")
       .find("input")
-      .map(function(i, e) {
+      .map(function (i, e) {
         obj[$(this).prop("name")] = $(this).val();
       });
     $("#apartado-form")
       .find("select")
-      .map(function(i, e) {
+      .map(function (i, e) {
         obj[$(this).prop("name")] = $(this).val();
       });
-    });
-
-    function reset_content(selector) {
-      $(selector + " input, " + selector + " select").each(function() {
-        $(this).val("");
-      });
-      $(".chosen-select")
-        .val("")
-        .trigger("chosen:updated");
-    }
-
-    $(".chosen-select")
-      .chosen({
-        width: "100%",
-        no_results_text: "No se encontraron resultados",
-      })
-      .change(function() {
-        $(".chosen-search")
-          .find("input")
-          .addClass("norequerido");
-      });
-
-    $("#hora_inicio").timepicker({
-      scrollDefault: "now",
-      minTime: "7:00am",
-      maxTime: "10:00pm",
-      interval: 30,
-    });
-
-    $("#dia_inicio").datepicker({
-      maxDate: "+3m",
-      minDate: "now",
-    });
   });
+
+  function reset_content(selector) {
+    $(selector + " input, " + selector + " select").each(function () {
+      $(this).val("");
+    });
+    $(".chosen-select")
+      .val("")
+      .trigger("chosen:updated");
+  }
+
+  $(".chosen-select")
+    .chosen({
+      width: "100%",
+      no_results_text: "No se encontraron resultados",
+    })
+    .change(function () {
+      $(".chosen-search")
+        .find("input")
+        .addClass("norequerido");
+    });
+
+  $("#hora_inicio").timepicker({
+    scrollDefault: "now",
+    minTime: "7:00am",
+    maxTime: "10:00pm",
+    interval: 30,
+  });
+
+  $("#dia_inicio").datepicker({
+    maxDate: "+3m",
+    minDate: "now",
+  });
+});

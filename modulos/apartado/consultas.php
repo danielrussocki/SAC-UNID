@@ -53,7 +53,11 @@ function guardar(){
 			array_push($todos, $arreglo);
 		}
 		$db->insert("reservas", $todos);
+		$respuesta["status"] = 1; 
+	}else{
+		$respuesta["status"] = 0;
 	}
+	echo json_encode($respuesta);
 }
 function insertApartado()
 {
@@ -137,27 +141,25 @@ function updateApartado($id)
 	$fecha= strftime("%y-%m-%d %H:%M:%S");
 	$respuesta = [];
 	extract($_POST);
-	if (empty($usuario) || empty($fecha_inicio) || empty($fecha_fin) || empty($hora_inicio) || empty($hora_fin) || empty($servicio) || empty($canon) || empty($salon)) {
+	if (empty($usuario) || empty($dia_inicio) || empty($hora_inicio) || empty($servicio) || empty($canon) || empty($salon) || empty($comentarios) || empty($accesorios)){
 		$respuesta["status"] = 0;
 	} else {
 		$db->update("reservas", [
 			"usr_id" => $usuario,
-			"fecha_inicio" => $fecha_inicio,
-			"fecha_fin" => $fecha_fin,
+			"fecha_inicio" => $dia_inicio,
+			"fecha_fin" => $dia_inicio,
 			"hora_inicio" => $hora_inicio,
-			"hora_fin" => $hora_fin,
+			"hora_fin" => $hora_inicio,
 			"servicios_id" => $servicio,
 			"canon_id" => $canon,
 			"salon_id" => $salon,
-			"comentarios" => $comentario,
-			"accesorios" => $accesorio,
-			"status" => $status
+			"comentarios" => $comentarios,
+			"accesorios" => $accesorios
 		], [
 			"id_apartado" => $id
 		]);
-
-		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Apartado", "fecha_hora"=>$fecha]);
 		$respuesta["status"] = 1;
+		$db->insert("logs",["id_logs"=>"", "mensaje"=>"el usuario $varsesion Actualizo en el modulo Apartado", "fecha_hora"=>$fecha]);
 	}
 	echo json_encode($respuesta);
 }

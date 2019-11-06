@@ -210,12 +210,12 @@ if (isset($varsesion)) {
                                             } catch (Exception $e) {echo "<script>errorAlert()</script>";}
                                             ?>
                                         </select>
-                                        <label for="comentarios">comentarios</label>
+                                        <label for="comentarios">Comentarios</label>
                                         <input type="text" name="comentarios" id="comentarios">
                                         <label for="accesorios">Accesorios</label>
                                         <input type="text" name="accesorios" id="accesorios">
                                     </div>
-                                    <div class="col-sm-4 table-responsive">
+                                    <div class="col-sm-4 table-responsive" id="tabla">
                                         <table class="table table-striped" id="tabla_interna">
                                             <thead>
                                                 <tr>
@@ -237,6 +237,7 @@ if (isset($varsesion)) {
                                     <div class="row mt-3">
                                     <div class="col-sm-4">
                                         <button type="button" id="btn-interno" class="btn-agregar">Agregar</button>
+                                        <input type="hidden" name="id_usr" id="id_usr">
                                     </div>
                                     <div class="col-sm-4 ml-auto">
                                         <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
