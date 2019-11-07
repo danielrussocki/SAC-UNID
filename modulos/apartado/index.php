@@ -51,8 +51,8 @@ if (isset($varsesion)) {
                         }
                         ?>
                 </div>
-                <div class="info table ">
-                    <table id="table_apartado" class="table responsive compact display cell-border" style= "width:95%" >
+                <div class="info table table-responsive">
+                    <table id="table_apartado" class="table compact display cell-border" style= "width:95%" >
                         <thead class="thead-dark">
                             <tr>
                                 <th>Usuario</th>

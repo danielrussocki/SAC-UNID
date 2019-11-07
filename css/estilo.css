@@ -7,7 +7,6 @@
   text-decoration: none;
   font-family: "Quicksand", sans-serif;
 }
-
 body {
   background: #f3f5f9;
   min-height: 100vh;
@@ -183,9 +182,9 @@ body {
   background: #343a40;
   width: 100%;
   border: 0;
-  padding: 5px;
+  padding: 15px;
   color: #fff;
-  font-size: 5px;
+  font-size: 14px;
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
@@ -219,8 +218,9 @@ footer p {
   z-index: 10;
   top: 0;
 }
-
-.dataTables_paginate {
-  position: relative;
-  right:50px;
+@media screen and (min-width: 768px) {
+  .dataTables_paginate.paging_simple_numbers,
+  .dataTables_filter {
+    margin-right: 28px;
+  }
 }
